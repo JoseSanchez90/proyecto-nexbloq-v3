@@ -25,7 +25,7 @@ const useResizeObserver = (callback, elements, dependencies) => {
     return () => {
       observers.forEach(observer => observer?.disconnect());
     };
-  }, [callback, elements, dependencies]);
+  }, [callback, ...elements, ...dependencies]);
 };
 
 const useImageLoader = (seqRef, onLoad, dependencies) => {
@@ -55,7 +55,7 @@ const useImageLoader = (seqRef, onLoad, dependencies) => {
         img.removeEventListener('error', handleImageLoad);
       });
     };
-  }, [onLoad, seqRef, dependencies]);
+  }, [onLoad, seqRef, ...dependencies]);
 };
 
 const useAnimationLoop = (trackRef, targetVelocity, seqWidth, seqHeight, isHovered, hoverSpeed, isVertical) => {

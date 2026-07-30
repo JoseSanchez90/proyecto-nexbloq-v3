@@ -1,56 +1,74 @@
 import ButtonPrimary from "@/components/ui/buttons/button-primary";
-import Carousel from "@/components/ui/carousel";
+import HeroShowcaseSlider from "@/components/home/hero-showcase-slider";
 
-const projectImages = [
+const showcaseImages = [
   {
-    src: "/projects-images/FreightFlow-CRM-de-Transporte.webp",
-    alt: "Panel principal del sistema FreightFlow",
+    src: "/home/pag11.png",
+    alt: "Vista previa de proyecto web de Nexbloq",
   },
   {
-    src: "/projects-images/FreightFlow-CRM-de-Transporte-2.webp",
-    alt: "Módulo de ventas del sistema FreightFlow",
+    src: "/home/pag2.png",
+    alt: "Interfaz de proyecto digital desarrollado por Nexbloq",
   },
   {
-    src: "/projects-images/FreightFlow-CRM-de-Transporte-3.webp",
-    alt: "Vista logística del sistema FreightFlow",
+    src: "/home/pag3.png",
+    alt: "Diseño de página web creado por Nexbloq",
   },
+  {
+    src: "/home/pag4.png",
+    alt: "Muestra de experiencia web diseñada por Nexbloq",
+  },
+] satisfies [
+  { src: string; alt: string },
+  { src: string; alt: string },
+  { src: string; alt: string },
+  { src: string; alt: string },
 ];
 
 export default function HeroSection() {
   return (
     <section
       id="inicio"
-      className="relative isolate mt-4 w-full max-w-7xl scroll-mt-6 overflow-hidden rounded-2xl bg-white pb-14 pt-16 sm:mt-10 sm:pb-20 sm:pt-20"
+      className="showcase-grid relative isolate w-full max-w-7xl overflow-hidden rounded-xl bg-white py-16"
     >
       <div
-        aria-hidden="true"
-        className="showcase-grid pointer-events-none absolute inset-0 z-0"
-      />
+        data-scroll-reveal-ignore
+        className="page-intro-reveal relative z-10 mx-auto flex max-w-4xl flex-col items-center px-5 text-center"
+      >
+        <div className="flex w-fit items-center gap-2 rounded-full border border-zinc-200 bg-white px-3.5 py-1.5">
+          <span className="size-1.5 rounded-full bg-indigo-600" />
+          <p className="text-base font-semibold uppercase tracking-[0.12em]">
+            Desarrollo web
+          </p>
+        </div>
 
-      <div className="relative z-10 flex flex-col items-center justify-center gap-6 px-5">
-        <h1 className="bg-white px-4 text-center text-3xl font-semibold leading-tight tracking-tight sm:text-4xl lg:text-[3.3rem] lg:leading-16">
+        <h1 className="mt-7 bg-white px-3 text-3xl font-semibold leading-[1.10] tracking-[-0.04em] sm:text-4xl lg:text-6xl">
           TU NEGOCIO MERECE
-          <br className="hidden sm:block" /> UNA WEB A SU{" "}
-          <span className="font-light italic">ALTURA.</span>
+          <br /> UNA WEB A SU <span className="font-light italic">ALTURA.</span>
         </h1>
-
-        <p className="max-w-2xl bg-white px-4 text-center text-base leading-7 text-gray-500 sm:text-lg">
-          Diseño y desarrollo páginas web modernas, rápidas y pensadas para
-          presentar mejor tu negocio, generar confianza y facilitar nuevas
-          oportunidades.
-        </p>
-
-        <ButtonPrimary
-          text="Ver proyectos"
-          href="#proyectos"
-          size="sm"
-          className="mt-2 sm:mt-4"
-        />
       </div>
 
-      <div className="relative z-10 mt-16 flex flex-col gap-8 overflow-hidden sm:mt-24">
-        <Carousel images={projectImages} direction="right" speed={30} />
-        <Carousel images={projectImages} direction="left" speed={30} />
+      <div
+        data-scroll-reveal-ignore
+        className="page-intro-reveal page-intro-delay-1 relative z-10 mt-11"
+      >
+        <HeroShowcaseSlider images={showcaseImages} />
+      </div>
+
+      <div
+        data-scroll-reveal-ignore
+        className="page-intro-reveal page-intro-delay-2 relative z-10 mx-auto mt-8 flex max-w-xl flex-col items-center px-5 text-center"
+      >
+        <p className="text-base leading-6 text-zinc-500 sm:text-sm">
+          Diseño y desarrollo páginas web modernas, rápidas y pensadas para
+          presentar mejor tu negocio y generar confianza.
+        </p>
+        <ButtonPrimary
+          text="Explorar servicios"
+          href="#servicios"
+          size="sm"
+          className="mt-5"
+        />
       </div>
     </section>
   );

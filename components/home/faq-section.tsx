@@ -1,79 +1,116 @@
-import { ChevronDown } from "lucide-react";
-import SectionHeading from "@/components/ui/section-heading";
+"use client";
 
-interface FrequentlyAskedQuestion {
-  question: string;
-  answer: string;
-}
+import { useState } from "react";
+import { Minus, Plus } from "lucide-react";
+import ButtonPrimary from "@/components/ui/buttons/button-primary";
 
-const questions: FrequentlyAskedQuestion[] = [
+const questions = [
   {
-    question: "¿Cuánto tiempo toma desarrollar una página web?",
+    question: "¿Qué servicios ofrece Nexbloq?",
     answer:
-      "Depende de la cantidad de secciones, las funcionalidades y la disponibilidad del contenido. Una landing page puede requerir aproximadamente entre dos y tres semanas; el cronograma definitivo se establece después de conocer el alcance.",
+      "Diseño y desarrollo landing pages, sitios corporativos, rediseños, sistemas web y soluciones para dominio, hosting y mantenimiento.",
   },
   {
-    question: "¿Qué incluye el servicio de desarrollo web?",
+    question: "¿Cuánto tiempo toma completar un proyecto?",
     answer:
-      "Puede incluir planificación, estructura de contenido, diseño de interfaz, desarrollo, adaptación móvil, formularios, optimización básica, pruebas y publicación. Los entregables exactos se detallan en cada propuesta.",
+      "Una landing page suele requerir entre dos y tres semanas. Los sitios corporativos y sistemas web se estiman después de definir contenido, alcance y funcionalidades.",
   },
   {
-    question: "¿El dominio y el hosting están incluidos?",
+    question: "¿Trabajas solo con empresas establecidas?",
     answer:
-      "Depende de la propuesta. Cuando no estén incluidos, te orientaré para elegirlos y configurarlos. Los servicios de dominio, hosting, correo y otras plataformas suelen tener pagos independientes.",
+      "No. Trabajo con emprendimientos, profesionales y empresas que necesitan construir o mejorar una solución digital con objetivos claros.",
   },
   {
-    question: "¿La página funcionará en celulares?",
+    question: "¿Cuánto cuesta desarrollar una página web?",
     answer:
-      "Sí. Cada interfaz se adapta a celulares, tablets y computadoras, revisando especialmente la legibilidad, la navegación, los botones y los formularios.",
+      "El presupuesto depende del tipo de proyecto, número de secciones, nivel de diseño y funcionalidades. Cada propuesta detalla alcance, tiempos y entregables.",
   },
   {
-    question: "¿Incluyes posicionamiento SEO?",
+    question: "¿Puedes rediseñar una página existente?",
     answer:
-      "Puedo incluir una configuración técnica inicial con títulos, descripciones, estructura semántica, sitemap y optimización básica. Las primeras posiciones en Google no son inmediatas ni pueden garantizarse.",
-  },
-  {
-    question: "¿Ofreces mantenimiento después de publicar la web?",
-    answer:
-      "Sí. Puede contratarse mediante un plan periódico o solicitudes puntuales. Las actividades y tiempos de atención se definen según el servicio acordado.",
-  },
-  {
-    question: "¿Cómo comenzamos?",
-    answer:
-      "Envíame una descripción breve de tu negocio, el tipo de página que necesitas, las funciones principales y cualquier referencia visual. Con esa información podré revisar el alcance y preparar una propuesta.",
+      "Sí. Primero reviso la estructura, experiencia, rendimiento y tecnología actual para definir qué conviene conservar, mejorar o reconstruir.",
   },
 ];
 
 export default function FaqSection() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const active = questions[activeIndex];
+
   return (
     <section
       id="preguntas-frecuentes"
-      className="scroll-mt-8 px-5 py-20 sm:px-10 lg:px-14 lg:py-28"
+      className="showcase-grid w-full max-w-7xl mb-24 rounded-xl bg-white px-5 py-16 sm:px-10 sm:py-20 lg:px-12"
     >
-      <SectionHeading
-        eyebrow="PREGUNTAS FRECUENTES"
-        title="RESPUESTAS CLARAS ANTES"
-        accent="DE COMENZAR."
-        description="Estas respuestas explican de manera general cómo trabajo. Las condiciones definitivas se detallan en la propuesta de cada proyecto."
-      />
-
-      <div className="mx-auto mt-14 max-w-4xl space-y-3 lg:mt-20">
-        {questions.map(({ question, answer }) => (
-          <details
-            key={question}
-            className="group rounded-2xl border border-zinc-200 bg-white"
-          >
-            <summary className="flex cursor-pointer list-none items-center justify-between gap-5 px-6 py-5 font-semibold tracking-tight outline-none marker:hidden focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#5635ff]/40 sm:px-7">
-              {question}
-              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#5635ff]/10 text-[#5635ff]">
-                <ChevronDown className="h-4 w-4 transition-transform duration-300 group-open:rotate-180" />
-              </span>
-            </summary>
-            <p className="px-6 pb-6 pr-16 text-sm leading-7 text-zinc-500 sm:px-7 sm:pr-20">
-              {answer}
+      <div className="grid gap-8 sm:grid-cols-[1fr_0.7fr] items-end">
+        <div>
+          <div className="flex w-fit items-center gap-2 rounded-full border border-zinc-200 bg-white px-3.5 py-1.5">
+            <span className="size-1.5 rounded-full bg-indigo-600" />
+            <p className="text-base font-semibold uppercase tracking-[0.12em]">
+              FAQ
             </p>
-          </details>
-        ))}
+          </div>
+          <h2 className="mt-6 text-3xl font-semibold leading-tight tracking-[-0.04em] sm:text-5xl">
+            RESPONDIENDO PREGUNTAS
+            <br />
+            <span className="font-light italic">FRECUENTES.</span>
+          </h2>
+        </div>
+        <p className="max-w-xs text-base leading-6 text-zinc-500 sm:justify-self-end">
+          Respuestas generales para comprender cómo trabajo antes de solicitar
+          una propuesta para tu proyecto.
+        </p>
+      </div>
+
+      <div className="mt-12 grid gap-3 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+        <div className="grid gap-2">
+          {questions.map((item, index) => (
+            <button
+              key={item.question}
+              type="button"
+              onClick={() => setActiveIndex(index)}
+              aria-pressed={activeIndex === index}
+              className={`flex min-h-14 items-center justify-between gap-4 rounded-lg border px-5 text-left text-sm cursor-pointer transition-colors ${
+                activeIndex === index
+                  ? "border-indigo-600 bg-indigo-600 text-white"
+                  : "border-zinc-200 bg-white text-zinc-700 hover:border-zinc-400"
+              }`}
+            >
+              <span className="text-base font-semibold">
+                {index + 1}. {item.question}
+              </span>
+              <span
+                className={`flex size-7 shrink-0 items-center justify-center rounded-full ${
+                  activeIndex === index
+                    ? "bg-white text-indigo-600"
+                    : "bg-zinc-100 text-zinc-500"
+                }`}
+              >
+                {activeIndex === index ? (
+                  <Minus aria-hidden="true" className="size-3.5" />
+                ) : (
+                  <Plus aria-hidden="true" className="size-3.5" />
+                )}
+              </span>
+            </button>
+          ))}
+        </div>
+
+        <article className="flex min-h-80 flex-col justify-between rounded-lg border border-zinc-200 bg-white p-6 sm:p-7 lg:p-8">
+          <div>
+            <h3 className="text-2xl font-semibold tracking-tight">
+              Respuesta:
+            </h3>
+            <div className="my-5 h-px bg-zinc-200" />
+            <p className="text-base leading-7 text-zinc-500">{active.answer}</p>
+          </div>
+          <div className="mt-8 w-fit">
+            <ButtonPrimary
+              text="Hablar del proyecto"
+              href="/contacto"
+              size="sm"
+            />
+          </div>
+        </article>
       </div>
     </section>
   );

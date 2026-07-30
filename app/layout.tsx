@@ -4,6 +4,7 @@ import { poppins } from "@/lib/fonts";
 import Navbar from "@/components/main/navbar";
 import Footer from "@/components/main/footer";
 import WhatsAppButton from "@/components/main/whatsapp-button";
+import ScrollReveal from "@/components/main/scroll-reveal";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { contactInfo, socialLinks } from "@/lib/contact";
 
@@ -97,6 +98,7 @@ export default function RootLayout({
           <main className="flex-1">{children}</main>
           <Footer />
           <WhatsAppButton />
+          <ScrollReveal />
         </TooltipProvider>
         <script
           type="application/ld+json"

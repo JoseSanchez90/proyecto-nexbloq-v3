@@ -1,42 +1,51 @@
 "use client";
 
-import { useState, type MouseEvent } from "react";
-import Image from "next/image";
+import { useEffect, useLayoutEffect, useState, type MouseEvent } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import clsx from "clsx";
-import { museomoderno } from "@/lib/fonts";
 import ButtonPrimary from "@/components/ui/buttons/button-primary";
 
 const navLinks = [
-  { label: "Inicio", href: "#inicio" },
-  { label: "Sobre mí", href: "#sobre-mi" },
-  { label: "Servicios", href: "#servicios" },
-  { label: "Proyectos", href: "#proyectos" },
-  { label: "Proceso", href: "#proceso" },
-  { label: "Preguntas", href: "#preguntas-frecuentes" },
+  { label: "Inicio", href: "/", section: "#inicio" },
+  { label: "Sobre mí", href: "/sobre-mi" },
+  { label: "Servicios", href: "/servicios" },
+  { label: "Proyectos", href: "/proyectos" },
 ];
 
 function Navbar() {
+  const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
-  const scrollToSection = (href: string) => {
-    const target = document.querySelector<HTMLElement>(href);
+  useLayoutEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+  }, [pathname]);
 
-    if (!target) {
-      return;
-    }
+  useEffect(() => {
+    const updateNavbar = () => {
+      const scrollTop = window.scrollY;
 
-    setIsMenuOpen(false);
-    window.history.pushState(null, "", href);
+      setIsScrolled((current) => (current ? scrollTop > 1 : scrollTop > 24));
+    };
+
+    setIsScrolled(window.scrollY > 24);
+    window.addEventListener("scroll", updateNavbar, { passive: true });
+
+    return () => window.removeEventListener("scroll", updateNavbar);
+  }, []);
+
+  const moveToSection = (section: string) => {
+    const target = document.querySelector<HTMLElement>(section);
+
+    if (!target) return;
 
     window.requestAnimationFrame(() => {
       const header = document.querySelector<HTMLElement>("header");
       const headerHeight = header?.offsetHeight ?? 0;
       const targetTop =
-        target.getBoundingClientRect().top +
-        window.scrollY -
-        headerHeight -
-        16;
+        target.getBoundingClientRect().top + window.scrollY - headerHeight - 16;
 
       window.scrollTo({
         top: Math.max(0, targetTop),
@@ -48,65 +57,89 @@ function Navbar() {
   const handleNavigation = (
     event: MouseEvent<HTMLAnchorElement>,
     href: string,
+    section?: string,
   ) => {
+    setIsMenuOpen(false);
+
+    if (!section && window.location.pathname === href) {
+      event.preventDefault();
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+      return;
+    }
+
+    if (!section || window.location.pathname !== "/") return;
+
     event.preventDefault();
-    scrollToSection(href);
+    window.history.pushState(null, "", href);
+    moveToSection(section);
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-zinc-100/95 backdrop-blur-md">
+    <header
+      className={clsx(
+        "pointer-events-none sticky top-0 z-50 h-17 w-full sm:h-19 lg:h-24",
+        isScrolled
+          ? "bg-transparent px-3 sm:px-4"
+          : "bg-zinc-100/95 backdrop-blur-md",
+      )}
+    >
       <nav
         aria-label="Navegación principal"
-        className="relative mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 sm:py-4"
+        className={clsx(
+          "pointer-events-auto relative mx-auto flex items-center justify-between transition-[max-width,padding,border-radius,box-shadow] duration-500 ease-[cubic-bezier(0.76,0,0.24,1)]",
+          isScrolled
+            ? "max-w-4xl rounded-b-4xl bg-white/70 px-4 py-3 shadow-[0_10px_35px_rgba(24,24,27,0.2)] backdrop-blur-xl sm:px-5"
+            : "max-w-6xl border border-transparent bg-zinc-100 px-4 py-3 sm:px-6 sm:py-4",
+        )}
       >
-        <a
-          href="#inicio"
-          className="flex min-w-0 items-center gap-1"
-          onClick={(event) => handleNavigation(event, "#inicio")}
+        <Link
+          href="/#inicio"
+          scroll={false}
+          className="flex min-w-0 items-center gap-3"
+          onClick={(event) => handleNavigation(event, "/#inicio", "#inicio")}
         >
-          <Image
-            className="h-9 w-9 shrink-0 sm:h-11 sm:w-11"
-            src="/images/logo-black.png"
-            alt="Nexbloq"
-            width={50}
-            height={50}
-            priority
-          />
-          <p
+          <img
             className={clsx(
-              "truncate text-2xl font-semibold tracking-tighter sm:text-3xl",
-              museomoderno.className,
+              "shrink-0 transition-all duration-500 ease-[cubic-bezier(0.76,0,0.24,1)]",
+              isScrolled ? "h-7 w-5 sm:h-10 sm:w-8" : "h-9 w-7 sm:h-11 sm:w-9",
             )}
-          >
-            Nexbloq
-          </p>
-        </a>
+            src="/logo/logo3.png"
+            alt="Nexbloq"
+          />
+        </Link>
 
-        <div className="hidden items-center gap-4 lg:flex xl:gap-7">
+        <div className="hidden items-center gap-4 lg:flex xl:gap-4">
           {navLinks.map((link) => (
-            <a
+            <Link
               key={link.href}
               href={link.href}
-              onClick={(event) => handleNavigation(event, link.href)}
-              className="group flex h-5 flex-col overflow-hidden text-sm"
+              scroll={false}
+              onClick={(event) =>
+                handleNavigation(event, link.href, link.section)
+              }
+              className={clsx(
+                "group flex flex-col overflow-hidden transition-all duration-400",
+                isScrolled ? "h-5 text-sm" : "h-6 text-base",
+              )}
             >
-              <span className="text-center text-gray-500 transition-transform duration-500 group-hover:-translate-y-full">
+              <span className="text-center text-gray-600 transition-transform duration-400 group-hover:-translate-y-full">
                 {link.label}
               </span>
               <span
                 aria-hidden="true"
-                className="text-center text-blue-600 transition-transform duration-500 group-hover:-translate-y-full"
+                className="text-center text-indigo-600 transition-transform duration-400 group-hover:-translate-y-full"
               >
                 [ {link.label} ]
               </span>
-            </a>
+            </Link>
           ))}
         </div>
 
         <ButtonPrimary
-          size="sm"
+          size={isScrolled ? "xs" : "sm"}
           text="Contáctame"
-          onClick={() => scrollToSection("#contacto")}
+          href="/contacto"
+          scroll={false}
           className="hidden font-semibold lg:flex"
         />
 
@@ -116,7 +149,7 @@ function Navbar() {
           aria-expanded={isMenuOpen}
           aria-controls="mobile-navigation"
           onClick={() => setIsMenuOpen((current) => !current)}
-          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-zinc-200 bg-white text-zinc-950 shadow-sm transition-colors hover:border-[#5635ff] hover:text-[#5635ff] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5635ff]/30 lg:hidden"
+          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-zinc-200 bg-white text-zinc-950 shadow-sm transition-colors hover:border-indigo-600 hover:text-indigo-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600/30 lg:hidden"
         >
           {isMenuOpen ? (
             <X aria-hidden="true" className="h-5 w-5" />
@@ -132,24 +165,28 @@ function Navbar() {
           >
             <div className="flex flex-col">
               {navLinks.map((link) => (
-                <a
+                <Link
                   key={link.href}
                   href={link.href}
-                  onClick={(event) => handleNavigation(event, link.href)}
-                  className="flex items-center justify-between rounded-xl px-4 py-3.5 text-sm font-medium text-zinc-700 transition-colors hover:bg-zinc-100 hover:text-[#5635ff]"
+                  scroll={false}
+                  onClick={(event) =>
+                    handleNavigation(event, link.href, link.section)
+                  }
+                  className="flex items-center justify-between rounded-xl px-4 py-3.5 text-sm font-medium text-zinc-700 transition-colors hover:bg-zinc-100 hover:text-indigo-600"
                 >
                   {link.label}
                   <span aria-hidden="true" className="text-zinc-300">
                     /
                   </span>
-                </a>
+                </Link>
               ))}
             </div>
 
             <ButtonPrimary
               size="sm"
               text="Contáctame"
-              onClick={() => scrollToSection("#contacto")}
+              href="/contacto"
+              scroll={false}
               className="mt-3 w-full justify-between font-semibold"
             />
           </div>
