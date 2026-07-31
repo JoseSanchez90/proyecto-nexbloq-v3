@@ -26,11 +26,14 @@ function Navbar() {
   useEffect(() => {
     const updateNavbar = () => {
       const scrollTop = window.scrollY;
+      const enterThreshold = window.innerWidth < 1024 ? 8 : 24;
 
-      setIsScrolled((current) => (current ? scrollTop > 1 : scrollTop > 24));
+      setIsScrolled((current) =>
+        current ? scrollTop > 1 : scrollTop > enterThreshold,
+      );
     };
 
-    setIsScrolled(window.scrollY > 24);
+    setIsScrolled(window.scrollY > (window.innerWidth < 1024 ? 8 : 24));
     window.addEventListener("scroll", updateNavbar, { passive: true });
 
     return () => window.removeEventListener("scroll", updateNavbar);
@@ -122,7 +125,7 @@ function Navbar() {
       <nav
         aria-label="Navegación principal"
         className={clsx(
-          "pointer-events-auto relative z-10 mx-auto flex max-w-6xl flex-wrap items-center justify-between border px-4 py-3 transition-[max-width,padding,border-radius,background-color,box-shadow] duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] sm:px-6 sm:py-4 lg:flex-nowrap lg:overflow-visible lg:border-transparent",
+          "pointer-events-auto relative z-10 mx-auto flex max-w-6xl flex-wrap items-center justify-between border px-4 py-3 transition-[max-width,padding,border-radius,background-color,box-shadow] duration-300 ease-[cubic-bezier(0.76,0,0.24,1)] sm:px-6 sm:py-4 lg:duration-500 lg:flex-nowrap lg:overflow-visible lg:border-transparent",
           isMenuOpen
             ? "overflow-hidden rounded-b-[1.75rem] border-white bg-white shadow-lg"
             : isScrolled
