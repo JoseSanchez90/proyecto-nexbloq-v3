@@ -7,7 +7,6 @@ import { ArrowUpRight } from "lucide-react";
 import clsx from "clsx";
 import Logo from "@/public/logo/logo3.png";
 import ButtonPrimary from "@/components/ui/buttons/button-primary";
-import Image from "next/image";
 
 const navLinks = [
   { label: "Inicio", href: "/", section: "#inicio" },
@@ -141,12 +140,12 @@ function Navbar() {
           className="flex min-w-0 items-center gap-3"
           onClick={(event) => handleNavigation(event, "/", "#inicio")}
         >
-          <Image
+          <img
             className={clsx(
               "shrink-0 transition-all duration-500 ease-[cubic-bezier(0.76,0,0.24,1)]",
               isScrolled ? "h-9 w-7 sm:h-10 sm:w-8" : "h-9 w-7 sm:h-11 sm:w-9",
             )}
-            src={Logo}
+            src="/logo/logo3.png"
             alt="Nexbloq"
           />
         </Link>
