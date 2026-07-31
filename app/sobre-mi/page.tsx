@@ -77,7 +77,7 @@ export default function AboutPage() {
     <div className="flex flex-col items-center bg-zinc-100 px-4 pb-24">
       <section
         id="sobre-mi"
-        className="showcase-grid w-full max-w-7xl scroll-mt-24 overflow-hidden rounded-xl bg-white px-5 py-16 sm:px-10 sm:py-20 lg:px-12 lg:py-24"
+        className="showcase-grid w-full max-w-7xl scroll-mt-17 overflow-hidden rounded-xl bg-white px-5 py-16 sm:scroll-mt-19 sm:px-10 sm:py-20 lg:scroll-mt-24 lg:px-12 lg:py-24"
       >
         <div
           data-scroll-reveal-ignore
@@ -110,9 +110,9 @@ export default function AboutPage() {
 
         <div
           data-scroll-reveal-ignore
-          className="page-intro-reveal page-intro-delay-1 mt-14 grid items-stretch gap-6 sm:grid-cols-[0.62fr_1.8fr_0.62fr]"
+          className="page-intro-reveal page-intro-delay-1 mt-14 grid items-stretch gap-6 md:grid-cols-[0.62fr_1.8fr_0.62fr]"
         >
-          <div className="relative hidden min-h-80 overflow-hidden rounded-2xl sm:block">
+          <div className="relative hidden min-h-80 overflow-hidden rounded-2xl md:block">
             <Image
               src="/services-images/landing-pages.webp"
               alt="Diseño visual de una experiencia digital"
@@ -143,7 +143,7 @@ export default function AboutPage() {
               <span className="absolute -bottom-1 -right-1 h-[15%] w-[12%] rounded-br-xl border-b-3 border-r-3 border-indigo-600" />
             </div>
           </div>
-          <div className="relative hidden min-h-80 overflow-hidden rounded-2xl sm:block">
+          <div className="relative hidden min-h-80 overflow-hidden rounded-2xl md:block">
             <Image
               src="/projects-images/concepto-desarrollo-web.webp"
               alt="Desarrollo de soluciones digitales"
@@ -225,7 +225,7 @@ export default function AboutPage() {
       </section>
 
       <section className="w-full max-w-7xl py-24 sm:py-32">
-        <div className="grid gap-7 sm:grid-cols-[1fr_0.6fr] sm:items-end">
+        <div className="grid gap-7 md:grid-cols-[1fr_0.6fr] md:items-end">
           <div>
             <div className="flex w-fit items-center gap-2 rounded-full border border-zinc-300 bg-white px-3.5 py-1.5">
               <span className="size-1.5 rounded-full bg-indigo-600" />
@@ -238,17 +238,17 @@ export default function AboutPage() {
               <span className="font-light italic">sus palabras.</span>
             </h2>
           </div>
-          <p className="max-w-sm text-base leading-7 text-zinc-500 sm:justify-self-end">
+          <p className="max-w-sm text-base leading-7 text-zinc-500 md:justify-self-end">
             Relaciones de trabajo construidas con claridad, comunicación directa
             y atención a cada detalle.
           </p>
         </div>
 
-        <div className="mt-14 grid gap-4 lg:grid-cols-3">
+        <div className="mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {testimonials.map((testimonial) => (
             <article
               key={testimonial.name}
-              className="group flex min-h-80 flex-col justify-between rounded-2xl bg-white p-6 transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:bg-indigo-600 sm:p-8"
+              className="group flex min-h-80 flex-col justify-between rounded-2xl bg-white p-6 transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:bg-indigo-600 sm:p-8 md:last:col-span-2 lg:last:col-span-1"
             >
               <blockquote className="text-lg font-semibold leading-8 tracking-tight transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-white">
                 “{testimonial.quote}”
@@ -275,7 +275,7 @@ export default function AboutPage() {
       </section>
 
       <section className="showcase-grid w-full max-w-7xl rounded-xl bg-white px-5 py-16 sm:px-10 sm:py-20 lg:px-12">
-        <div className="grid gap-8 sm:grid-cols-[1fr_0.7fr] sm:items-end">
+        <div className="grid gap-8 md:grid-cols-[1fr_0.7fr] md:items-end">
           <div>
             <div className="flex w-fit items-center gap-2 rounded-full border border-zinc-200 bg-white px-3.5 py-1.5">
               <span className="size-1.5 rounded-full bg-indigo-600" />
@@ -288,7 +288,7 @@ export default function AboutPage() {
               <span className="font-light italic">trabajar juntos.</span>
             </h2>
           </div>
-          <p className="max-w-sm text-base leading-7 text-zinc-500 sm:justify-self-end">
+          <p className="max-w-sm text-base leading-7 text-zinc-500 md:justify-self-end">
             Una introducción rápida a mi forma de colaborar y desarrollar cada
             proyecto.
           </p>

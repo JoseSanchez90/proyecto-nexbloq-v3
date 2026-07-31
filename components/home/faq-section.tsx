@@ -41,7 +41,7 @@ export default function FaqSection() {
       id="preguntas-frecuentes"
       className="showcase-grid w-full max-w-7xl mb-24 rounded-xl bg-white px-5 py-16 sm:px-10 sm:py-20 lg:px-12"
     >
-      <div className="grid gap-8 sm:grid-cols-[1fr_0.7fr] items-end">
+      <div className="grid items-end gap-8 md:grid-cols-[1fr_0.7fr]">
         <div>
           <div className="flex w-fit items-center gap-2 rounded-full border border-zinc-200 bg-white px-3.5 py-1.5">
             <span className="size-1.5 rounded-full bg-indigo-600" />
@@ -55,13 +55,13 @@ export default function FaqSection() {
             <span className="font-light italic">FRECUENTES.</span>
           </h2>
         </div>
-        <p className="max-w-xs text-base leading-6 text-zinc-500 sm:justify-self-end">
+        <p className="max-w-xs text-base leading-6 text-zinc-500 md:justify-self-end">
           Respuestas generales para comprender cómo trabajo antes de solicitar
           una propuesta para tu proyecto.
         </p>
       </div>
 
-      <div className="mt-12 grid gap-3 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+      <div className="mt-12 grid gap-3 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
         <div className="grid gap-2">
           {questions.map((item, index) => (
             <button
@@ -75,7 +75,7 @@ export default function FaqSection() {
                   : "border-zinc-200 bg-white text-zinc-700 hover:border-zinc-400"
               }`}
             >
-              <span className="text-base font-semibold">
+              <span className="text-sm lg:text-base font-medium">
                 {index + 1}. {item.question}
               </span>
               <span

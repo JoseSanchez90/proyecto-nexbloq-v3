@@ -35,7 +35,7 @@ export default function ValuesShowcase() {
   const activeValue = values[activeIndex];
 
   return (
-    <div className="mt-16 grid gap-4 lg:grid-cols-[0.7fr_1fr] lg:gap-3">
+    <div className="mt-12 grid gap-4 sm:mt-16 lg:grid-cols-[0.7fr_1fr] lg:gap-3">
       <div className="grid content-start gap-3">
         {values.map((value, index) => {
           const isActive = activeIndex === index;

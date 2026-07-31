@@ -5,27 +5,28 @@ import Image from "next/image";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import clsx from "clsx";
 import { museomoderno } from "@/lib/fonts";
+import { MoveRight } from "lucide-react";
 
 const principles = [
   {
     label: "Diagnóstico",
     title: "Entender antes de diseñar",
     text: "Primero identifico tus objetivos, el público, el contenido y las acciones que la solución debe facilitar.",
-    image: "/projects-images/concepto-diseno-ux.webp",
+    image: "/home/diagnostico.png",
     imageAlt: "Diagnóstico y análisis de una experiencia digital",
   },
   {
     label: "Dirección",
     title: "Decisiones con propósito",
     text: "La estructura, la interfaz y la tecnología responden a necesidades concretas, no a decisiones decorativas.",
-    image: "/services-images/rediseno-web.webp",
+    image: "/home/direccion.png",
     imageAlt: "Dirección de diseño para un proyecto web",
   },
   {
     label: "Entrega",
     title: "Un proceso visible y ordenado",
     text: "Trabajamos por etapas definidas, con revisiones oportunas y comunicación directa durante todo el proyecto.",
-    image: "/projects-images/FreightFlow-CRM-de-Transporte-2.webp",
+    image: "/home/entrega.png",
     imageAlt: "Entrega de una solución web desarrollada por Nexbloq",
   },
 ];
@@ -79,7 +80,7 @@ export default function ProcessSection() {
                 }
                 className={`group relative w-full overflow-hidden rounded-2xl border text-left outline-none transition-colors focus-visible:ring-2 focus-visible:ring-indigo-600 focus-visible:ring-offset-2 cursor-pointer ${
                   isActive
-                    ? "h-72 border-indigo-600 md:h-72 lg:h-76"
+                    ? "h-72 border-zinc-200 md:h-72 lg:h-76"
                     : "h-19 border-zinc-200 bg-white hover:border-zinc-400"
                 }`}
               >
@@ -146,16 +147,11 @@ export default function ProcessSection() {
               className="flex h-full flex-1 flex-col justify-between"
             >
               <div>
-                <div
-                  className={clsx(
-                    "flex items-center gap-2 text-zinc-400",
-                    museomoderno.className,
-                  )}
-                >
-                  <span className="flex size-8 items-center justify-center rounded-md bg-zinc-200 text-sm font-bold text-zinc-400">
-                    N
-                  </span>
-                  <p className="text-base font-semibold">Nexbloq Studio</p>
+                <div className="flex items-center gap-2 text-indigo-600">
+                  <MoveRight className="w-5 h-5" />
+                  <p className="text-sm font-semibold uppercase tracking-[0.14em] sm:text-base">
+                    {active.label}
+                  </p>
                 </div>
                 <h3 className="mt-10 max-w-xl text-2xl font-semibold leading-tight tracking-[-0.035em] lg:text-3xl">
                   “{active.title}.”
@@ -165,16 +161,27 @@ export default function ProcessSection() {
                 </p>
               </div>
 
-              <div className="mt-12 flex items-end justify-between gap-6 border-t border-zinc-200 pt-6">
-                <div>
-                  <p className="text-sm font-semibold uppercase">Nexbloq</p>
-                  <p className="mt-1 text-xs text-zinc-400">
-                    Desarrollo web personalizado
+              <div className="mt-12 flex flex-col items-start gap-5 border-t border-zinc-200 pt-6 sm:flex-row sm:items-end sm:justify-between">
+                <p className="mt-1 text-sm font-semibold text-zinc-400">
+                  Desarrollo web personalizado
+                </p>
+                <div
+                  className={clsx(
+                    "flex items-center gap-2 text-zinc-400",
+                    museomoderno.className,
+                  )}
+                >
+                  <div className="rounded-lg bg-zinc-400 px-1.5 py-1">
+                    <img
+                      src="/logo/logo4.png"
+                      alt="Nexbloq"
+                      className="h-4.5 w-3"
+                    />
+                  </div>
+                  <p className="text-sm font-semibold sm:text-base">
+                    Nexbloq Studio
                   </p>
                 </div>
-                <p className="text-sm font-semibold tracking-[0.16em] text-indigo-600">
-                  0{activeIndex + 1} / 03
-                </p>
               </div>
             </motion.div>
           </AnimatePresence>

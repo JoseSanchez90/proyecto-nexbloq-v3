@@ -61,7 +61,9 @@ export default function ServicesAccordion() {
   return (
     <div
       className="mt-14 border-t border-zinc-200"
-      onMouseLeave={() => setActiveIndex(null)}
+      onPointerLeave={(event) => {
+        if (event.pointerType === "mouse") setActiveIndex(null);
+      }}
     >
       {services.map((service, index) => {
         const isActive = activeIndex === index;
@@ -70,16 +72,21 @@ export default function ServicesAccordion() {
         return (
           <article
             key={service.title}
-            onMouseEnter={() => setActiveIndex(index)}
+            onPointerEnter={(event) => {
+              if (event.pointerType === "mouse") setActiveIndex(index);
+            }}
             className="border-b border-zinc-200"
           >
             <button
               type="button"
-              onClick={() => setActiveIndex(isActive ? null : index)}
-              onFocus={() => setActiveIndex(index)}
+              onClick={() =>
+                setActiveIndex((current) =>
+                  current === index ? null : index,
+                )
+              }
               aria-expanded={isActive}
               aria-controls={contentId}
-              className="group flex min-h-24 w-full items-center gap-6 py-5 text-left sm:gap-8"
+              className="group flex min-h-20 w-full items-center gap-4 py-5 text-left sm:min-h-24 sm:gap-8"
             >
               <span
                 className={`flex size-10 shrink-0 items-center justify-center rounded-full transition-colors duration-300 ${
@@ -95,7 +102,7 @@ export default function ServicesAccordion() {
                 )}
               </span>
               <h2
-                className={`text-xl font-semibold tracking-tight transition-colors duration-300 sm:text-5xl ${
+                className={`text-xl font-semibold tracking-tight transition-colors duration-300 sm:text-3xl lg:text-5xl ${
                   isActive
                     ? "text-indigo-600"
                     : "text-zinc-900 group-hover:text-indigo-600"
@@ -112,7 +119,7 @@ export default function ServicesAccordion() {
               }`}
             >
               <div className="overflow-hidden">
-                <div className="grid gap-7 pb-8 pl-0 sm:pl-18 lg:grid-cols-[1fr_20rem] lg:items-start">
+                <div className="grid gap-7 pb-8 pl-0 md:pl-18 lg:grid-cols-[1fr_20rem] lg:items-start">
                   <div>
                     <p className="max-w-xl text-base leading-7 text-zinc-500">
                       {service.description}

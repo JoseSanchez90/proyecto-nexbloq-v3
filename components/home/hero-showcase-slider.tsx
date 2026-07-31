@@ -17,38 +17,38 @@ const TRANSITION_TIME = 750;
 
 const positions = {
   exit: {
-    left: "-38%",
-    top: "9%",
-    width: "28%",
-    height: "82%",
+    left: "var(--showcase-exit-left)",
+    top: "var(--showcase-side-top)",
+    width: "var(--showcase-side-width)",
+    height: "var(--showcase-side-height)",
     opacity: 0,
   },
   left: {
-    left: "-6%",
-    top: "9%",
-    width: "28%",
-    height: "82%",
+    left: "var(--showcase-left-left)",
+    top: "var(--showcase-side-top)",
+    width: "var(--showcase-side-width)",
+    height: "var(--showcase-side-height)",
     opacity: 1,
   },
   center: {
-    left: "calc(22% + var(--showcase-gap))",
-    top: "5px",
-    width: "calc(56% - var(--showcase-double-gap))",
-    height: "calc(100% - 10px)",
+    left: "var(--showcase-center-left)",
+    top: "var(--showcase-center-top)",
+    width: "var(--showcase-center-width)",
+    height: "var(--showcase-center-height)",
     opacity: 1,
   },
   right: {
-    left: "78%",
-    top: "9%",
-    width: "28%",
-    height: "82%",
+    left: "var(--showcase-right-left)",
+    top: "var(--showcase-side-top)",
+    width: "var(--showcase-side-width)",
+    height: "var(--showcase-side-height)",
     opacity: 1,
   },
   queued: {
-    left: "108%",
-    top: "9%",
-    width: "28%",
-    height: "82%",
+    left: "var(--showcase-queued-left)",
+    top: "var(--showcase-side-top)",
+    width: "var(--showcase-side-width)",
+    height: "var(--showcase-side-height)",
     opacity: 0,
   },
 } as const;
@@ -95,16 +95,8 @@ export default function HeroShowcaseSlider({
 
   return (
     <div
-      className="relative h-56 w-full sm:h-76 lg:h-96"
+      className="hero-showcase-slider relative h-56 w-full sm:h-76 lg:h-96"
       aria-label="Muestra animada de proyectos y servicios de Nexbloq"
-      style={
-        {
-          "--showcase-gap": "clamp(28px, 4.5vw, 64px)",
-          "--showcase-double-gap": "clamp(56px, 9vw, 128px)",
-          "--showcase-frame-gap": "clamp(23px, calc(4.5vw - 5px), 59px)",
-          "--showcase-frame-double-gap": "clamp(46px, calc(9vw - 10px), 118px)",
-        } as CSSProperties
-      }
     >
       {orderedImages.map((image, index) => (
         <div
@@ -112,6 +104,7 @@ export default function HeroShowcaseSlider({
           className="absolute overflow-hidden rounded-lg bg-zinc-100"
           style={{
             ...itemPositions[index],
+            aspectRatio: "1586 / 992",
             transition: transitionEnabled
               ? `left ${TRANSITION_TIME}ms cubic-bezier(0.76, 0, 0.24, 1), top ${TRANSITION_TIME}ms cubic-bezier(0.76, 0, 0.24, 1), width ${TRANSITION_TIME}ms cubic-bezier(0.76, 0, 0.24, 1), height ${TRANSITION_TIME}ms cubic-bezier(0.76, 0, 0.24, 1), opacity 420ms ease`
               : "none",
@@ -122,19 +115,22 @@ export default function HeroShowcaseSlider({
             alt={image.alt}
             fill
             priority
-            sizes="(max-width: 640px) 48vw, 480px"
-            className="object-cover object-top"
+            sizes="(max-width: 639px) 82vw, 480px"
+            className="object-contain object-center sm:object-cover sm:object-top"
           />
         </div>
       ))}
 
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute top-0 z-10 h-full"
+        className="pointer-events-none absolute z-10"
         style={{
-          left: "calc(22% + var(--showcase-frame-gap))",
-          width: "calc(56% - var(--showcase-frame-double-gap))",
-        }}
+          left: "var(--showcase-frame-left)",
+          top: "var(--showcase-frame-top)",
+          width: "var(--showcase-frame-width)",
+          height: "var(--showcase-frame-height)",
+          aspectRatio: "1586 / 992",
+        } as CSSProperties}
       >
         <span className="absolute -left-1 -top-1 h-[15%] w-[12%] rounded-tl-xl border-l-3 border-t-3 border-indigo-600" />
         <span className="absolute -right-1 -top-1 h-[15%] w-[12%] rounded-tr-xl border-r-3 border-t-3 border-indigo-600" />

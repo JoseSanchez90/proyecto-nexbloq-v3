@@ -29,7 +29,7 @@ export default function HeroSection() {
   return (
     <section
       id="inicio"
-      className="showcase-grid relative isolate w-full max-w-7xl overflow-hidden rounded-xl bg-white py-16"
+      className="showcase-grid relative isolate w-full max-w-7xl scroll-mt-17 overflow-hidden rounded-xl bg-white py-16 sm:scroll-mt-19 lg:scroll-mt-24"
     >
       <div
         data-scroll-reveal-ignore

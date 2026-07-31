@@ -174,7 +174,7 @@ export default function ContactForm() {
                 type="button"
                 onClick={() => setSelectedService(service)}
                 aria-pressed={isSelected}
-                className={`cursor-pointer rounded-full px-4 py-2 text-xs font-medium transition-colors ${
+                className={`min-h-10 cursor-pointer rounded-full px-4 py-2 text-xs font-medium transition-colors sm:min-h-11 ${
                   isSelected
                     ? "bg-indigo-600 text-white"
                     : "bg-zinc-100 text-zinc-600 hover:bg-indigo-400 hover:text-white"
@@ -208,14 +208,14 @@ export default function ContactForm() {
         </label>
         <div className="grid gap-2 text-sm font-semibold">
           <label htmlFor="contact-phone">WhatsApp</label>
-          <div className="flex h-11 overflow-hidden rounded-xl border border-input bg-zinc-50 transition-[border-color,box-shadow] focus-within:border-ring focus-within:ring-3 focus-within:ring-ring/50">
+          <div className="flex h-11 min-w-0 overflow-hidden rounded-xl border border-input bg-zinc-50 transition-[border-color,box-shadow] focus-within:border-ring focus-within:ring-3 focus-within:ring-ring/50">
             <Select
               value={selectedCountryIso}
               onValueChange={(value) => setSelectedCountryIso(value ?? "PE")}
             >
               <SelectTrigger
                 aria-label="Seleccionar código de país"
-                className="h-full w-26 shrink-0 rounded-none border-0 border-r border-zinc-200 bg-white px-3 shadow-none focus-visible:ring-0"
+                className="h-full w-24 shrink-0 rounded-none border-0 border-r border-zinc-200 bg-white px-2.5 shadow-none focus-visible:ring-0 sm:w-26 sm:px-3"
               >
                 <span className="flex items-center gap-2">
                   <selectedCountry.Flag

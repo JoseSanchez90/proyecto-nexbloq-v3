@@ -14,7 +14,7 @@ export default function ProjectsPage() {
     <div className="flex flex-col items-center bg-zinc-100 px-4">
       <section
         id="proyectos"
-        className="showcase-grid flex min-h-96 w-full max-w-7xl scroll-mt-24 flex-col items-center justify-center rounded-xl bg-white px-5 py-16 text-center sm:px-10 sm:py-20 lg:px-12"
+        className="showcase-grid flex min-h-96 w-full max-w-7xl scroll-mt-17 flex-col items-center justify-center rounded-xl bg-white px-5 py-16 text-center sm:scroll-mt-19 sm:px-10 sm:py-20 lg:scroll-mt-24 lg:px-12"
       >
         <div
           data-scroll-reveal-ignore

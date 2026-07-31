@@ -17,7 +17,7 @@ export default function ContactPage() {
     <div className="flex flex-col items-center bg-zinc-100 px-4 pb-24">
       <section
         id="contacto"
-        className="showcase-grid w-full max-w-7xl scroll-mt-24 rounded-xl bg-white px-5 py-16 sm:px-10 sm:py-20 lg:px-12 lg:py-24"
+        className="showcase-grid w-full max-w-7xl scroll-mt-17 rounded-xl bg-white px-5 py-16 sm:scroll-mt-19 sm:px-10 sm:py-20 lg:scroll-mt-24 lg:px-12 lg:py-24"
       >
         <div
           data-scroll-reveal-ignore

@@ -18,9 +18,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       <div
         className={cn(
           "relative overflow-hidden rounded-2xl bg-zinc-200",
-          project.featured
-            ? "aspect-16/10 sm:aspect-[16/6.2]"
-            : "aspect-16/10",
+          project.featured ? "aspect-16/10 sm:aspect-[16/6.2]" : "aspect-16/10",
         )}
       >
         <Image
@@ -34,18 +32,14 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           }
           className="object-cover object-top"
         />
-        <span
-          aria-hidden="true"
-          className="absolute inset-x-0 top-0 h-1/3 bg-linear-to-b from-black/80 via-black/20 to-transparent"
-        />
 
-        <div className="absolute left-5 top-5 flex items-center gap-2 text-sm font-semibold uppercase text-white drop-shadow-sm">
+        <div className="absolute right-5 bottom-5 flex items-center gap-2 text-sm font-semibold uppercase bg-indigo-500 px-2 py-1 rounded-full text-white drop-shadow-md">
           <span className="size-2 rounded-full bg-white" />
           {project.category}
         </div>
 
-        <span className="absolute right-5 top-5 flex size-16 items-center justify-center rounded-full bg-white text-indigo-600 opacity-0 shadow-sm transition-opacity duration-300 group-hover:opacity-100">
-          <ArrowUpRight aria-hidden="true" className="size-8" />
+        <span className="absolute right-5 top-5 flex size-12 xl:size-16 items-center justify-center rounded-full bg-indigo-500 text-white opacity-0 shadow-sm transition-opacity duration-300 group-hover:opacity-100">
+          <ArrowUpRight aria-hidden="true" className="size-6 xl:size-8" />
         </span>
       </div>
 

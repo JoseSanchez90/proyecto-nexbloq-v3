@@ -3,7 +3,7 @@
 import { useEffect, useLayoutEffect, useState, type MouseEvent } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import clsx from "clsx";
 import ButtonPrimary from "@/components/ui/buttons/button-primary";
 
@@ -35,6 +35,29 @@ function Navbar() {
 
     return () => window.removeEventListener("scroll", updateNavbar);
   }, []);
+
+  useEffect(() => {
+    if (!isMenuOpen) return;
+
+    const previousOverflow = document.documentElement.style.overflow;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setIsMenuOpen(false);
+    };
+    const desktopMedia = window.matchMedia("(min-width: 1024px)");
+    const closeOnDesktop = (event: MediaQueryListEvent) => {
+      if (event.matches) setIsMenuOpen(false);
+    };
+
+    document.documentElement.style.overflow = "hidden";
+    window.addEventListener("keydown", closeOnEscape);
+    desktopMedia.addEventListener("change", closeOnDesktop);
+
+    return () => {
+      document.documentElement.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", closeOnEscape);
+      desktopMedia.removeEventListener("change", closeOnDesktop);
+    };
+  }, [isMenuOpen]);
 
   const moveToSection = (section: string) => {
     const target = document.querySelector<HTMLElement>(section);
@@ -77,31 +100,49 @@ function Navbar() {
   return (
     <header
       className={clsx(
-        "pointer-events-none sticky top-0 z-50 h-17 w-full sm:h-19 lg:h-24",
+        "pointer-events-none sticky top-0 z-50 h-17 w-full px-6 sm:h-19 sm:px-4 lg:h-24",
         isScrolled
-          ? "bg-transparent px-3 sm:px-4"
-          : "bg-zinc-100/95 backdrop-blur-md",
+          ? "bg-transparent lg:px-4"
+          : "bg-transparent lg:bg-zinc-100/95 lg:px-0 lg:backdrop-blur-md",
       )}
     >
+      <button
+        type="button"
+        aria-label="Cerrar menú"
+        tabIndex={isMenuOpen ? 0 : -1}
+        onClick={() => setIsMenuOpen(false)}
+        className={clsx(
+          "fixed inset-0 z-0 bg-zinc-950/15 backdrop-blur-[3px] transition-[opacity,visibility] duration-500 lg:hidden",
+          isMenuOpen
+            ? "pointer-events-auto visible opacity-100"
+            : "pointer-events-none invisible opacity-0",
+        )}
+      />
+
       <nav
         aria-label="Navegación principal"
         className={clsx(
-          "pointer-events-auto relative mx-auto flex items-center justify-between transition-[max-width,padding,border-radius,box-shadow] duration-500 ease-[cubic-bezier(0.76,0,0.24,1)]",
+          "pointer-events-auto relative z-10 mx-auto flex max-w-6xl flex-wrap items-center justify-between border px-4 py-3 transition-[max-width,padding,border-radius,background-color,box-shadow] duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] sm:px-6 sm:py-4 lg:flex-nowrap lg:overflow-visible lg:border-transparent",
+          isMenuOpen
+            ? "overflow-hidden rounded-b-[1.75rem] border-white bg-white shadow-lg"
+            : isScrolled
+              ? "overflow-visible rounded-b-[1.75rem] border-white bg-white shadow-lg"
+              : "overflow-visible rounded-none border-transparent bg-transparent shadow-none",
           isScrolled
-            ? "max-w-4xl rounded-b-4xl bg-white/70 px-4 py-3 shadow-[0_10px_35px_rgba(24,24,27,0.2)] backdrop-blur-xl sm:px-5"
-            : "max-w-6xl border border-transparent bg-zinc-100 px-4 py-3 sm:px-6 sm:py-4",
+            ? "lg:max-w-4xl lg:rounded-t-none lg:rounded-b-4xl lg:bg-white/80 lg:px-5 lg:py-3 lg:shadow-[0_10px_35px_rgba(24,24,27,0.18)] lg:backdrop-blur-xl"
+            : "lg:rounded-none lg:bg-zinc-100 lg:px-6 lg:py-4 lg:shadow-none",
         )}
       >
         <Link
-          href="/#inicio"
+          href="/"
           scroll={false}
           className="flex min-w-0 items-center gap-3"
-          onClick={(event) => handleNavigation(event, "/#inicio", "#inicio")}
+          onClick={(event) => handleNavigation(event, "/", "#inicio")}
         >
           <img
             className={clsx(
               "shrink-0 transition-all duration-500 ease-[cubic-bezier(0.76,0,0.24,1)]",
-              isScrolled ? "h-7 w-5 sm:h-10 sm:w-8" : "h-9 w-7 sm:h-11 sm:w-9",
+              isScrolled ? "h-9 w-7 sm:h-10 sm:w-8" : "h-9 w-7 sm:h-11 sm:w-9",
             )}
             src="/logo/logo3.png"
             alt="Nexbloq"
@@ -149,48 +190,126 @@ function Navbar() {
           aria-expanded={isMenuOpen}
           aria-controls="mobile-navigation"
           onClick={() => setIsMenuOpen((current) => !current)}
-          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-zinc-200 bg-white text-zinc-950 shadow-sm transition-colors hover:border-indigo-600 hover:text-indigo-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600/30 lg:hidden"
-        >
-          {isMenuOpen ? (
-            <X aria-hidden="true" className="h-5 w-5" />
-          ) : (
-            <Menu aria-hidden="true" className="h-5 w-5" />
+          className={clsx(
+            "relative z-20 flex h-12 w-12 touch-manipulation select-none items-center justify-center rounded-full border shadow-sm transition-[border-color,background-color,color] duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600/30 lg:hidden",
+            isMenuOpen
+              ? "border-zinc-200 bg-white text-zinc-950 hover:border-indigo-600 hover:text-indigo-600"
+              : "border-zinc-200 bg-white text-zinc-950 hover:border-indigo-600 hover:text-indigo-600",
           )}
+        >
+          <span
+            aria-hidden="true"
+            className={clsx(
+              "absolute h-0.5 w-5 rounded-full bg-current transition-transform duration-300",
+              isMenuOpen ? "translate-y-0 rotate-45" : "-translate-y-1.5",
+            )}
+          />
+          <span
+            aria-hidden="true"
+            className={clsx(
+              "absolute h-0.5 w-5 rounded-full bg-current transition-opacity duration-200",
+              isMenuOpen ? "opacity-0" : "opacity-100",
+            )}
+          />
+          <span
+            aria-hidden="true"
+            className={clsx(
+              "absolute h-0.5 w-5 rounded-full bg-current transition-transform duration-300",
+              isMenuOpen ? "translate-y-0 -rotate-45" : "translate-y-1.5",
+            )}
+          />
         </button>
 
-        {isMenuOpen && (
-          <div
-            id="mobile-navigation"
-            className="absolute left-4 right-4 top-full mt-2 max-h-[calc(100dvh-5.5rem)] overflow-y-auto rounded-2xl border border-zinc-200 bg-white p-3 shadow-[0_20px_60px_rgba(24,24,27,0.16)] sm:left-6 sm:right-6 lg:hidden"
-          >
-            <div className="flex flex-col">
-              {navLinks.map((link) => (
+        <div
+          id="mobile-navigation"
+          aria-hidden={!isMenuOpen}
+          className={clsx(
+            "order-last w-full basis-full origin-top overflow-y-auto scrollbar-none [&::-webkit-scrollbar]:hidden transition-[max-height,margin,opacity,transform,visibility] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] lg:hidden",
+            isMenuOpen
+              ? "visible mt-3 max-h-[calc(100dvh-6.5rem)] translate-y-0 opacity-100"
+              : "invisible pointer-events-none mt-0 max-h-0 -translate-y-2 opacity-0",
+          )}
+        >
+          <div className="flex items-center px-3 pb-3 pt-4">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-400">
+              Navegación
+            </p>
+          </div>
+
+          <div className="overflow-hidden rounded-2xl border border-zinc-100 bg-zinc-50/80 px-2">
+            {navLinks.map((link, index) => {
+              const isActive = pathname === link.href;
+
+              return (
                 <Link
                   key={link.href}
                   href={link.href}
                   scroll={false}
+                  tabIndex={isMenuOpen ? undefined : -1}
+                  aria-current={isActive ? "page" : undefined}
                   onClick={(event) =>
                     handleNavigation(event, link.href, link.section)
                   }
-                  className="flex items-center justify-between rounded-xl px-4 py-3.5 text-sm font-medium text-zinc-700 transition-colors hover:bg-zinc-100 hover:text-indigo-600"
+                  className={clsx(
+                    "group flex min-h-15 items-center gap-4 border-b border-zinc-200/70 px-2 text-left transition-[opacity,transform,color] duration-500 last:border-b-0",
+                    isMenuOpen
+                      ? "translate-y-0 opacity-100"
+                      : "translate-y-3 opacity-0",
+                    isActive
+                      ? "text-indigo-600"
+                      : "text-zinc-700 hover:text-indigo-600",
+                  )}
+                  style={{
+                    transitionDelay: isMenuOpen
+                      ? `${100 + index * 55}ms`
+                      : "0ms",
+                  }}
                 >
-                  {link.label}
-                  <span aria-hidden="true" className="text-zinc-300">
-                    /
+                  <span className="w-7 text-xs font-semibold text-zinc-400">
+                    0{index + 1}
+                  </span>
+                  <span className="flex-1 text-lg font-medium tracking-tight">
+                    {link.label}
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    className={clsx(
+                      "flex size-9 items-center justify-center rounded-full transition-all duration-300",
+                      isActive
+                        ? "bg-indigo-600 text-white"
+                        : "bg-white text-zinc-400 group-hover:bg-indigo-600 group-hover:text-white",
+                    )}
+                  >
+                    <ArrowUpRight className="size-4" />
                   </span>
                 </Link>
-              ))}
-            </div>
+              );
+            })}
+          </div>
 
+          <div
+            className={clsx(
+              "mt-2 transition-[opacity,transform] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
+              isMenuOpen
+                ? "translate-y-0 opacity-100"
+                : "translate-y-3 opacity-0",
+            )}
+            style={{
+              transitionDelay: isMenuOpen
+                ? `${100 + navLinks.length * 55}ms`
+                : "0ms",
+            }}
+          >
             <ButtonPrimary
               size="sm"
-              text="Contáctame"
+              text="Cuéntame tu proyecto"
               href="/contacto"
               scroll={false}
-              className="mt-3 w-full justify-between font-semibold"
+              onClick={() => setIsMenuOpen(false)}
+              className="w-full justify-between font-semibold"
             />
           </div>
-        )}
+        </div>
       </nav>
     </header>
   );

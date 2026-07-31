@@ -8,15 +8,15 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    image: "/projects-images/FreightFlow-CRM-de-Transporte.webp",
+    image: "/home/freightflow-1.webp",
     title: "FreightFlow CRM",
     category: "Sistema web",
     year: "2026",
   },
   {
-    image: "/projects-images/concepto-diseno-ux.webp",
-    title: "Concepto UX/UI",
-    category: "Diseño de producto",
+    image: "/home/SmileDental-1.webp",
+    title: "Smile Dental",
+    category: "Landing page",
     year: "2026",
   },
   {

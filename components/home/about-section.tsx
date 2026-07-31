@@ -44,17 +44,17 @@ export default function AboutSection() {
   return (
     <section
       id="sobre-mi"
-      className="w-full max-w-7xl scroll-mt-24 px-4 py-20 sm:px-0 sm:py-28"
+      className="w-full max-w-7xl scroll-mt-24 py-20 sm:py-28"
     >
       <div className="grid items-start gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14">
         <div className="order-2 lg:sticky lg:top-24 lg:order-1">
-          <div className="relative min-h-124 overflow-hidden rounded-xl sm:min-h-148">
+          <div className="relative min-h-96 overflow-hidden rounded-xl sm:min-h-148">
             <Image
               src="/home/about.png"
               alt="Diseño y desarrollo web realizado por Nexbloq"
               fill
               sizes="(max-width: 1024px) 100vw, 440px"
-              className="object-cover"
+              className="object-scale-down"
             />
           </div>
         </div>

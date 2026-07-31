@@ -92,6 +92,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" className={`${poppins.variable} h-full antialiased`}>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              'if ("scrollRestoration" in history) history.scrollRestoration = "manual";',
+          }}
+        />
+      </head>
       <body className="flex min-h-full flex-col">
         <TooltipProvider delay={250}>
           <Navbar />
