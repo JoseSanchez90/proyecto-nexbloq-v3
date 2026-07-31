@@ -5,7 +5,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ArrowUpRight } from "lucide-react";
 import clsx from "clsx";
-import Logo from "@/public/logo/logo3.png";
 import ButtonPrimary from "@/components/ui/buttons/button-primary";
 
 const navLinks = [
@@ -145,7 +144,7 @@ function Navbar() {
               "shrink-0 transition-all duration-500 ease-[cubic-bezier(0.76,0,0.24,1)]",
               isScrolled ? "h-9 w-7 sm:h-10 sm:w-8" : "h-9 w-7 sm:h-11 sm:w-9",
             )}
-            src="/logo/logo3.png"
+            src="/logo/Logo3.png"
             alt="Nexbloq"
           />
         </Link>
