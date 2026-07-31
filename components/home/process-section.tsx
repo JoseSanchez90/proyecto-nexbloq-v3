@@ -171,7 +171,7 @@ export default function ProcessSection() {
                     museomoderno.className,
                   )}
                 >
-                  <div className="rounded-lg bg-zinc-400 px-1.5 py-1">
+                  <div className="rounded-md bg-zinc-400 px-2 py-1">
                     <img
                       src="/logo/Logo4.png"
                       alt="Nexbloq"
