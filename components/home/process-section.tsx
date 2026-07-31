@@ -173,7 +173,7 @@ export default function ProcessSection() {
                 >
                   <div className="rounded-lg bg-zinc-400 px-1.5 py-1">
                     <img
-                      src="/logo/logo4.png"
+                      src="/logo/Logo4.png"
                       alt="Nexbloq"
                       className="h-4.5 w-3"
                     />

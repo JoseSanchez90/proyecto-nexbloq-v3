@@ -136,7 +136,7 @@ export default function Footer() {
 
         <div className="flex flex-col items-center justify-between gap-5 border-t border-zinc-200 pt-7 sm:flex-row">
           <a href="/" className="flex min-h-11 items-center gap-3">
-            <img src="/logo/logo4.png" alt="Nexbloq" className="w-7 h-9" />
+            <img src="/logo/Logo4.png" alt="Nexbloq" className="w-7 h-9" />
             <span
               className={clsx(
                 "text-2xl font-semibold text-white tracking-tighter",
