@@ -21,6 +21,7 @@ const positions = {
     top: "var(--showcase-side-top)",
     width: "var(--showcase-side-width)",
     height: "var(--showcase-side-height)",
+    transform: "var(--showcase-side-transform)",
     opacity: 0,
   },
   left: {
@@ -28,6 +29,7 @@ const positions = {
     top: "var(--showcase-side-top)",
     width: "var(--showcase-side-width)",
     height: "var(--showcase-side-height)",
+    transform: "var(--showcase-side-transform)",
     opacity: 1,
   },
   center: {
@@ -35,6 +37,7 @@ const positions = {
     top: "var(--showcase-center-top)",
     width: "var(--showcase-center-width)",
     height: "var(--showcase-center-height)",
+    transform: "translateY(0)",
     opacity: 1,
   },
   right: {
@@ -42,6 +45,7 @@ const positions = {
     top: "var(--showcase-side-top)",
     width: "var(--showcase-side-width)",
     height: "var(--showcase-side-height)",
+    transform: "var(--showcase-side-transform)",
     opacity: 1,
   },
   queued: {
@@ -49,6 +53,7 @@ const positions = {
     top: "var(--showcase-side-top)",
     width: "var(--showcase-side-width)",
     height: "var(--showcase-side-height)",
+    transform: "var(--showcase-side-transform)",
     opacity: 0,
   },
 } as const;
@@ -101,12 +106,12 @@ export default function HeroShowcaseSlider({
       {orderedImages.map((image, index) => (
         <div
           key={image.src}
-          className="absolute overflow-hidden rounded-lg bg-zinc-100"
+          className="absolute overflow-hidden rounded-lg bg-white"
           style={{
             ...itemPositions[index],
             aspectRatio: "1586 / 992",
             transition: transitionEnabled
-              ? `left ${TRANSITION_TIME}ms cubic-bezier(0.76, 0, 0.24, 1), top ${TRANSITION_TIME}ms cubic-bezier(0.76, 0, 0.24, 1), width ${TRANSITION_TIME}ms cubic-bezier(0.76, 0, 0.24, 1), height ${TRANSITION_TIME}ms cubic-bezier(0.76, 0, 0.24, 1), opacity 420ms ease`
+              ? `left ${TRANSITION_TIME}ms cubic-bezier(0.76, 0, 0.24, 1), top ${TRANSITION_TIME}ms cubic-bezier(0.76, 0, 0.24, 1), width ${TRANSITION_TIME}ms cubic-bezier(0.76, 0, 0.24, 1), height ${TRANSITION_TIME}ms cubic-bezier(0.76, 0, 0.24, 1), transform ${TRANSITION_TIME}ms cubic-bezier(0.76, 0, 0.24, 1), opacity 420ms ease`
               : "none",
           }}
         >
@@ -116,7 +121,7 @@ export default function HeroShowcaseSlider({
             fill
             priority
             sizes="(max-width: 639px) 82vw, 480px"
-            className="object-contain object-center sm:object-cover sm:object-top"
+            className="object-contain object-center"
           />
         </div>
       ))}

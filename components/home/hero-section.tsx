@@ -11,7 +11,7 @@ const showcaseImages = [
     alt: "Interfaz de proyecto digital desarrollado por Nexbloq",
   },
   {
-    src: "/home/pag3.png",
+    src: "/home/pag33.png",
     alt: "Diseño de página web creado por Nexbloq",
   },
   {

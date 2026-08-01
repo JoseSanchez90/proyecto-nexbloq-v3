@@ -114,7 +114,7 @@ export default function AboutPage() {
         >
           <div className="relative hidden min-h-80 overflow-hidden rounded-2xl md:block">
             <Image
-              src="/services-images/landing-pages.webp"
+              src="/about/izquierda.webp"
               alt="Diseño visual de una experiencia digital"
               fill
               sizes="220px"
@@ -124,7 +124,7 @@ export default function AboutPage() {
           <div className="relative min-h-80 sm:min-h-112">
             <div className="absolute inset-2 overflow-hidden rounded-xl">
               <Image
-                src="/projects-images/concepto-diseno-ux.webp"
+                src="/about/centro.webp"
                 alt="Proceso de estrategia y diseño de Nexbloq"
                 fill
                 priority
@@ -145,7 +145,7 @@ export default function AboutPage() {
           </div>
           <div className="relative hidden min-h-80 overflow-hidden rounded-2xl md:block">
             <Image
-              src="/projects-images/concepto-desarrollo-web.webp"
+              src="/about/derecha.webp"
               alt="Desarrollo de soluciones digitales"
               fill
               sizes="220px"
