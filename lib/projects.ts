@@ -8,7 +8,7 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    image: "/projects/freightflow.webp",
+    image: "/projects/freightflow1.webp",
     title: "FreightFlow CRM",
     category: "Sistema web",
     year: "2026",

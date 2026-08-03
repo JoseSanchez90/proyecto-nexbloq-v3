@@ -17,7 +17,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
     >
       <div
         className={cn(
-          "relative overflow-hidden rounded-2xl bg-zinc-200",
+          "relative overflow-hidden rounded-2xl bg-zinc-200 shadow-sm",
           project.featured ? "aspect-16/10" : "aspect-16/10",
         )}
       >
