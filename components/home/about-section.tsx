@@ -44,7 +44,7 @@ export default function AboutSection() {
   return (
     <section
       id="sobre-mi"
-      className="w-full max-w-7xl scroll-mt-24 py-20 sm:py-28"
+      className="w-full max-w-7xl px-4 scroll-mt-24 py-20 sm:py-28"
     >
       <div className="grid items-start gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14">
         <div className="order-2 lg:sticky lg:top-24 lg:order-1">

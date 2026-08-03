@@ -71,6 +71,8 @@ export default function WhatsAppButton() {
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(preparedMessage)}`;
 
     window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+    setName("");
+    setMessage("");
     setIsOpen(false);
   }
 

@@ -156,7 +156,7 @@ export default function AboutPage() {
       </section>
 
       <section className="w-full max-w-7xl py-24 sm:py-32">
-        <div className="flex flex-col gap-7 sm:flex-row sm:items-end sm:justify-between">
+        <div className="flex flex-col gap-7 sm:flex-row sm:items-end sm:justify-between px-4">
           <div>
             <div className="flex w-fit items-center gap-2 rounded-full border border-zinc-300 bg-white px-3.5 py-1.5">
               <span className="size-1.5 rounded-full bg-indigo-600" />
@@ -225,7 +225,7 @@ export default function AboutPage() {
       </section>
 
       <section className="w-full max-w-7xl py-24 sm:py-32">
-        <div className="grid gap-7 md:grid-cols-[1fr_0.6fr] md:items-end">
+        <div className="grid gap-7 md:grid-cols-[1fr_0.6fr] md:items-end px-4">
           <div>
             <div className="flex w-fit items-center gap-2 rounded-full border border-zinc-300 bg-white px-3.5 py-1.5">
               <span className="size-1.5 rounded-full bg-indigo-600" />

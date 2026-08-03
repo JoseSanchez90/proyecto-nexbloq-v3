@@ -32,7 +32,7 @@ const socialIcons = [
 
 export default function Footer() {
   return (
-    <footer className="w-full rounded-t-[30px] bg-indigo-700 px-4 pb-24 pt-4 sm:rounded-t-[64px] sm:px-6 sm:pb-10 lg:rounded-t-[80px]">
+    <footer className="w-full rounded-t-[30px] bg-indigo-700 px-4 pb-12 pt-4 sm:rounded-t-[64px] sm:px-6 sm:pb-10 lg:rounded-t-[80px]">
       <div className="mx-auto max-w-7xl">
         <div className="grid min-w-0 grid-cols-2 gap-x-5 gap-y-10 py-10 md:py-14 lg:grid-cols-[0.9fr_0.8fr_1.3fr]">
           <div className="grid min-w-0 content-start grid-cols-1 gap-4 sm:grid-cols-[auto_minmax(0,1fr)] sm:gap-x-4 md:grid-cols-1 lg:grid-cols-[auto_minmax(0,1fr)]">
@@ -100,7 +100,7 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="col-span-2 grid min-w-0 content-start grid-cols-1 gap-4 sm:grid-cols-[auto_minmax(0,1fr)] sm:gap-x-4 md:grid-cols-[auto_minmax(0,1fr)] lg:col-span-1">
+          <div className="grid min-w-0 content-start grid-cols-1 gap-4 sm:grid-cols-[auto_minmax(0,1fr)] sm:gap-x-4 md:grid-cols-1 lg:grid-cols-[auto_minmax(0,1fr)]">
             <span className="text-base lg:text-lg font-semibold text-white">
               [Contacto]
             </span>

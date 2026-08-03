@@ -130,7 +130,7 @@ function Navbar() {
               ? "overflow-visible rounded-b-[1.75rem] border-white bg-white shadow-lg"
               : "overflow-visible rounded-none border-transparent bg-transparent shadow-none",
           isScrolled
-            ? "max-w-sm sm:max-w-lg lg:max-w-4xl lg:bg-white/90 lg:px-5 lg:py-3 lg:shadow-xl lg:backdrop-blur-xl"
+            ? "max-w-sm sm:max-w-md lg:max-w-4xl lg:bg-white/90 lg:px-5 lg:py-3 lg:shadow-xl lg:backdrop-blur-xl"
             : "max-w-md sm:max-w-3xl lg:max-w-6xl lg:bg-zinc-100/95 lg:px-6 lg:py-4 lg:shadow-none lg:backdrop-blur-none",
         )}
       >

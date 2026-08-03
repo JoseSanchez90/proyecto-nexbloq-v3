@@ -29,7 +29,7 @@ export default function HeroSection() {
   return (
     <section
       id="inicio"
-      className="showcase-grid relative isolate w-full max-w-7xl scroll-mt-17 overflow-hidden rounded-xl bg-white py-16 sm:scroll-mt-19 lg:scroll-mt-24"
+      className="showcase-grid relative isolate w-full max-w-7xl scroll-mt-17 px-4 overflow-hidden rounded-xl bg-white py-16 sm:scroll-mt-19 lg:scroll-mt-24"
     >
       <div
         data-scroll-reveal-ignore
@@ -57,7 +57,7 @@ export default function HeroSection() {
 
       <div
         data-scroll-reveal-ignore
-        className="page-intro-reveal page-intro-delay-2 relative z-10 mx-auto mt-12 flex max-w-xl flex-col items-center px-5 text-center sm:mt-12 lg:mt-6 xl:mt-8"
+        className="page-intro-reveal page-intro-delay-2 relative z-10 mx-auto mt-12 min-[560px]:mt-16 flex max-w-xl flex-col items-center px-5 text-center lg:mt-6 xl:mt-8"
       >
         <p className="text-base leading-6 text-zinc-500 sm:text-lg">
           Diseño y desarrollo páginas web modernas, rápidas y pensadas para

@@ -100,7 +100,7 @@ export default function HeroShowcaseSlider({
 
   return (
     <div
-      className="hero-showcase-slider relative h-56 w-full min-[480px]:h-64 sm:h-54 md:h-56 lg:h-80 xl:h-96"
+      className="hero-showcase-slider relative h-64 w-full min-[560px]:h-72 sm:h-54 md:h-56 lg:h-80 xl:h-96"
       aria-label="Muestra animada de proyectos y servicios de Nexbloq"
     >
       {orderedImages.map((image, index) => (
