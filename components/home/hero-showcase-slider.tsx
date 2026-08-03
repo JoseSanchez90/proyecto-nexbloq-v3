@@ -100,7 +100,7 @@ export default function HeroShowcaseSlider({
 
   return (
     <div
-      className="hero-showcase-slider relative h-56 w-full sm:h-76 lg:h-96"
+      className="hero-showcase-slider relative h-56 w-full min-[480px]:h-64 sm:h-54 md:h-56 lg:h-80 xl:h-96"
       aria-label="Muestra animada de proyectos y servicios de Nexbloq"
     >
       {orderedImages.map((image, index) => (
@@ -129,13 +129,15 @@ export default function HeroShowcaseSlider({
       <div
         aria-hidden="true"
         className="pointer-events-none absolute z-10"
-        style={{
-          left: "var(--showcase-frame-left)",
-          top: "var(--showcase-frame-top)",
-          width: "var(--showcase-frame-width)",
-          height: "var(--showcase-frame-height)",
-          aspectRatio: "1586 / 992",
-        } as CSSProperties}
+        style={
+          {
+            left: "var(--showcase-frame-left)",
+            top: "var(--showcase-frame-top)",
+            width: "var(--showcase-frame-width)",
+            height: "var(--showcase-frame-height)",
+            aspectRatio: "1586 / 992",
+          } as CSSProperties
+        }
       >
         <span className="absolute -left-1 -top-1 h-[15%] w-[12%] rounded-tl-xl border-l-3 border-t-3 border-indigo-600" />
         <span className="absolute -right-1 -top-1 h-[15%] w-[12%] rounded-tr-xl border-r-3 border-t-3 border-indigo-600" />

@@ -18,7 +18,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       <div
         className={cn(
           "relative overflow-hidden rounded-2xl bg-zinc-200",
-          project.featured ? "aspect-16/10 sm:aspect-[16/6.2]" : "aspect-16/10",
+          project.featured ? "aspect-16/10" : "aspect-16/10",
         )}
       >
         <Image

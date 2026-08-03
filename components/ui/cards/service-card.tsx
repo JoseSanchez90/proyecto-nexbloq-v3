@@ -24,7 +24,7 @@ export default function ServiceCard({
         className="absolute inset-0 z-0 origin-top scale-y-0 bg-[#5635ff] transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:scale-y-100"
       />
 
-      <div className="relative z-10 aspect-[16/10] overflow-hidden rounded-xl border border-zinc-200 bg-zinc-100">
+      <div className="relative z-10 aspect-16/10 overflow-hidden rounded-xl border border-zinc-200 bg-zinc-100">
         <Image
           src={image}
           alt={`Referencia visual de ${title}`}

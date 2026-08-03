@@ -103,10 +103,8 @@ function Navbar() {
   return (
     <header
       className={clsx(
-        "pointer-events-none sticky top-0 z-50 h-17 w-full px-6 sm:h-19 sm:px-4 lg:h-24",
-        isScrolled
-          ? "bg-transparent lg:px-4"
-          : "bg-transparent lg:bg-zinc-100/95 lg:px-0 lg:backdrop-blur-md",
+        "pointer-events-none sticky top-0 z-50 h-17 w-full bg-transparent px-6 transition-[padding] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:h-19 sm:px-4 lg:h-24",
+        isScrolled ? "lg:px-4" : "lg:px-0",
       )}
     >
       <button
@@ -125,15 +123,15 @@ function Navbar() {
       <nav
         aria-label="Navegación principal"
         className={clsx(
-          "pointer-events-auto relative z-10 mx-auto flex max-w-6xl flex-wrap items-center justify-between border px-4 py-3 transition-[max-width,padding,border-radius,background-color,box-shadow] duration-300 ease-[cubic-bezier(0.76,0,0.24,1)] sm:px-6 sm:py-4 lg:duration-500 lg:flex-nowrap lg:overflow-visible lg:border-transparent",
+          "pointer-events-auto relative z-10 mx-auto flex max-w-6xl flex-wrap items-center justify-between border px-4 py-3 transition-[max-width,padding,background-color,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] sm:px-6 sm:py-4 lg:flex-nowrap lg:overflow-hidden lg:rounded-b-4xl lg:border-transparent lg:duration-500 lg:will-change-[max-width,padding,background-color,box-shadow]",
           isMenuOpen
             ? "overflow-hidden rounded-b-[1.75rem] border-white bg-white shadow-lg"
             : isScrolled
               ? "overflow-visible rounded-b-[1.75rem] border-white bg-white shadow-lg"
               : "overflow-visible rounded-none border-transparent bg-transparent shadow-none",
           isScrolled
-            ? "lg:max-w-4xl lg:rounded-t-none lg:rounded-b-4xl lg:bg-white/80 lg:px-5 lg:py-3 lg:shadow-[0_10px_35px_rgba(24,24,27,0.18)] lg:backdrop-blur-xl"
-            : "lg:rounded-none lg:bg-zinc-100 lg:px-6 lg:py-4 lg:shadow-none",
+            ? "max-w-sm sm:max-w-lg lg:max-w-4xl lg:bg-white/90 lg:px-5 lg:py-3 lg:shadow-xl lg:backdrop-blur-xl"
+            : "max-w-md sm:max-w-3xl lg:max-w-6xl lg:bg-zinc-100/95 lg:px-6 lg:py-4 lg:shadow-none lg:backdrop-blur-none",
         )}
       >
         <Link
@@ -152,7 +150,7 @@ function Navbar() {
           />
         </Link>
 
-        <div className="hidden items-center gap-4 lg:flex xl:gap-4">
+        <div className="hidden items-center gap-4 lg:flex xl:gap-6">
           {navLinks.map((link) => (
             <Link
               key={link.href}

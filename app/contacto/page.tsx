@@ -45,7 +45,7 @@ export default function ContactPage() {
         >
           <aside className="flex flex-col">
             <div className="flex items-center gap-3">
-              <div className="bg-black px-2 py-1 rounded-lg">
+              <div className="bg-black px-2 py-1.5 rounded-lg">
                 <img
                   src="/logo/Logo4.png"
                   alt="LogoNexbloq"
@@ -64,7 +64,7 @@ export default function ContactPage() {
               Lo importante es entender el objetivo que quieres alcanzar.
             </p>
 
-            <div className="relative mt-8 min-h-72 flex-1 overflow-hidden rounded-2xl bg-zinc-100 lg:min-h-96">
+            <div className="relative mt-8 min-h-80 sm:min-h-126 flex-1 overflow-hidden rounded-2xl bg-zinc-100 lg:min-h-96">
               <Image
                 src="/profile/me.png"
                 alt="Conversación y planificación de un proyecto digital"

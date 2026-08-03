@@ -9,28 +9,28 @@ const services = [
     number: "01",
     title: "Landing pages",
     description: "Páginas enfocadas en presentar y convertir.",
-    image: "/home/landingpage.png",
+    image: "/home/landingpage.webp",
     imageAlt: "Diseño de una landing page profesional",
   },
   {
     number: "02",
     title: "Corporativos",
     description: "Presencias digitales completas para empresas.",
-    image: "/home/corporativo.png",
+    image: "/home/corporativo.webp",
     imageAlt: "Sitio web corporativo desarrollado por Nexbloq",
   },
   {
     number: "03",
     title: "Rediseño UX/UI",
     description: "Experiencias más claras, modernas y rápidas.",
-    image: "/home/rediseño.png",
+    image: "/home/rediseño.webp",
     imageAlt: "Proceso de rediseño de experiencia web",
   },
   {
     number: "04",
     title: "Sistemas web",
     description: "Herramientas para centralizar y ordenar procesos.",
-    image: "/home/dashboard.png",
+    image: "/home/dashboard.webp",
     imageAlt: "Sistema web personalizado para empresas",
   },
 ];
@@ -109,14 +109,14 @@ export default function ServicesSection() {
                 </p>
               </div>
 
-              <div className="relative z-20 col-span-3 mt-6 aspect-16/10 w-full max-w-3xl justify-self-center xl:hidden">
-                <div className="absolute inset-1 overflow-hidden rounded-lg bg-zinc-100">
+              <div className="relative z-20 col-span-3 mt-6 w-full max-w-3xl justify-self-center p-2 sm:p-3 xl:hidden">
+                <div className="relative aspect-video overflow-hidden rounded-lg bg-white">
                   <Image
                     src={service.image}
                     alt={service.imageAlt}
                     fill
                     sizes="(max-width: 639px) calc(100vw - 72px), 768px"
-                    className="object-cover"
+                    className="object-contain"
                   />
                 </div>
 

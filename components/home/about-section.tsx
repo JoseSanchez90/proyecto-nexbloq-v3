@@ -48,9 +48,9 @@ export default function AboutSection() {
     >
       <div className="grid items-start gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14">
         <div className="order-2 lg:sticky lg:top-24 lg:order-1">
-          <div className="relative min-h-96 overflow-hidden rounded-xl sm:min-h-148">
+          <div className="relative min-h-128 overflow-hidden rounded-xl sm:min-h-206 lg:min-h-148">
             <Image
-              src="/home/about.png"
+              src="/home/about.webp"
               alt="Diseño y desarrollo web realizado por Nexbloq"
               fill
               sizes="(max-width: 1024px) 100vw, 440px"
@@ -61,7 +61,7 @@ export default function AboutSection() {
 
         <div className="order-1 lg:order-2">
           <div className="flex w-fit items-center gap-2 rounded-full border border-zinc-300 bg-white px-3.5 py-1.5">
-            <span className="size-1.5 rounded-full bg-[#5635ff]" />
+            <span className="size-1.5 rounded-full bg-indigo-600" />
             <p className="text-base font-semibold uppercase tracking-[0.12em]">
               Sobre Nexbloq
             </p>
@@ -92,7 +92,7 @@ export default function AboutSection() {
                       }`}
                     >
                       <div className="flex items-center gap-4">
-                        <span className="flex size-12 shrink-0 items-center justify-center rounded-full bg-zinc-100 text-[#5635ff] sm:size-20">
+                        <span className="flex size-12 shrink-0 items-center justify-center rounded-full bg-zinc-100 text-indigo-600 sm:size-20">
                           <Icon
                             aria-hidden="true"
                             className="size-6 sm:size-7"

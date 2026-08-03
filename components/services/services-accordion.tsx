@@ -10,7 +10,7 @@ const services = [
     description:
       "Páginas enfocadas en presentar una oferta con claridad y convertir visitas en consultas, registros o ventas.",
     tags: ["Contenido estratégico", "Responsive", "Conversión"],
-    image: "/services-images/landing-pages.webp",
+    image: "/services/landing.webp",
     imageAlt: "Diseño de una landing page profesional",
   },
   {
@@ -18,7 +18,7 @@ const services = [
     description:
       "Presencias digitales completas para comunicar la propuesta, los servicios y la confianza de una empresa.",
     tags: ["Arquitectura web", "SEO técnico", "Identidad digital"],
-    image: "/services-images/sitios-corporativos.webp",
+    image: "/services/corporativo.webp",
     imageAlt: "Sitio web corporativo desarrollado por Nexbloq",
   },
   {
@@ -26,7 +26,7 @@ const services = [
     description:
       "Revisión y mejora de interfaces existentes para hacerlas más claras, actuales, rápidas y fáciles de utilizar.",
     tags: ["Diagnóstico UX", "Interfaz visual", "Prototipado"],
-    image: "/services-images/rediseno-web.webp",
+    image: "/services/rediseño.webp",
     imageAlt: "Proceso de rediseño de una experiencia web",
   },
   {
@@ -34,7 +34,7 @@ const services = [
     description:
       "Herramientas digitales a medida para centralizar información, organizar tareas y simplificar procesos internos.",
     tags: ["Paneles", "Automatización", "Base de datos"],
-    image: "/services-images/sistemas-web.webp",
+    image: "/services/sistemasweb.webp",
     imageAlt: "Sistema web personalizado para una empresa",
   },
   {
@@ -42,7 +42,7 @@ const services = [
     description:
       "Acompañamiento técnico para mantener el sitio actualizado, estable, seguro y preparado para seguir creciendo.",
     tags: ["Actualizaciones", "Soporte", "Mejora continua"],
-    image: "/services-images/mantenimiento.webp",
+    image: "/services/mantenimiento.webp",
     imageAlt: "Mantenimiento técnico de una plataforma web",
   },
   {
@@ -50,7 +50,7 @@ const services = [
     description:
       "Configuración de la infraestructura esencial para publicar el proyecto y operar con una presencia profesional.",
     tags: ["Dominio y DNS", "Alojamiento", "Correo corporativo"],
-    image: "/services-images/dominio-hosting.webp",
+    image: "/services/dominio.webp",
     imageAlt: "Infraestructura de dominio y alojamiento web",
   },
 ];
@@ -60,7 +60,7 @@ export default function ServicesAccordion() {
 
   return (
     <div
-      className="mt-14 border-t border-zinc-200"
+      className="mt-14"
       onPointerLeave={(event) => {
         if (event.pointerType === "mouse") setActiveIndex(null);
       }}
@@ -75,14 +75,12 @@ export default function ServicesAccordion() {
             onPointerEnter={(event) => {
               if (event.pointerType === "mouse") setActiveIndex(index);
             }}
-            className="border-b border-zinc-200"
+            className="border-b border-zinc-200 py-4 2xl:y-6"
           >
             <button
               type="button"
               onClick={() =>
-                setActiveIndex((current) =>
-                  current === index ? null : index,
-                )
+                setActiveIndex((current) => (current === index ? null : index))
               }
               aria-expanded={isActive}
               aria-controls={contentId}
@@ -119,7 +117,7 @@ export default function ServicesAccordion() {
               }`}
             >
               <div className="overflow-hidden">
-                <div className="grid gap-7 pb-8 pl-0 md:pl-18 lg:grid-cols-[1fr_20rem] lg:items-start">
+                <div className="grid gap-7 pb-8 pl-0 md:pl-18 lg:grid-cols-[minmax(0,1fr)_24rem] lg:items-start">
                   <div>
                     <p className="max-w-xl text-base leading-7 text-zinc-500">
                       {service.description}
@@ -142,7 +140,7 @@ export default function ServicesAccordion() {
                       src={service.image}
                       alt={service.imageAlt}
                       fill
-                      sizes="(max-width: 1023px) 100vw, 320px"
+                      sizes="(max-width: 1023px) 100vw, 384px"
                       className="service-preview-image object-cover"
                     />
                   </div>

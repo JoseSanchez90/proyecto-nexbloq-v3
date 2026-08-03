@@ -49,7 +49,7 @@ export default function AboutFaq() {
                   : "border-zinc-200 bg-white text-zinc-700 hover:border-zinc-400"
               }`}
             >
-              <span className="text-sm font-semibold">
+              <span className="text-sm lg:text-base font-semibold">
                 {index + 1}. {item.question}
               </span>
               <span

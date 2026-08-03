@@ -41,7 +41,7 @@ export default function ServicesPage() {
           className="page-intro-reveal page-intro-delay-1 relative mt-14 aspect-16/10 overflow-hidden rounded-2xl sm:aspect-16/7"
         >
           <Image
-            src="/services-images/rediseno-web.webp"
+            src="/services/servicios.webp"
             alt="Proceso creativo de diseño y desarrollo web"
             fill
             priority

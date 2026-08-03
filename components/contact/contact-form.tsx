@@ -188,25 +188,25 @@ export default function ContactForm() {
       </div>
 
       <div className="mt-8 grid gap-5 sm:grid-cols-2">
-        <label className="grid gap-2 text-sm font-semibold">
+        <label className="grid gap-2 text-sm font-medium">
           Nombre *
           <Input
             name="name"
             autoComplete="name"
             placeholder="Tu nombre"
-            className="h-11 rounded-xl bg-zinc-50"
+            className="h-11 rounded-xl bg-zinc-50 placeholder:text-[13px] sm:placeholder:text-sm"
           />
         </label>
-        <label className="grid gap-2 text-sm font-semibold">
+        <label className="grid gap-2 text-sm font-medium">
           Empresa
           <Input
             name="company"
             autoComplete="organization"
             placeholder="Nombre de tu empresa"
-            className="h-11 rounded-xl bg-zinc-50"
+            className="h-11 rounded-xl bg-zinc-50 placeholder:text-[13px] sm:placeholder:text-sm"
           />
         </label>
-        <div className="grid gap-2 text-sm font-semibold">
+        <div className="grid gap-2 text-sm font-medium">
           <label htmlFor="contact-phone">WhatsApp</label>
           <div className="flex h-11 min-w-0 overflow-hidden rounded-xl border border-input bg-zinc-50 transition-[border-color,box-shadow] focus-within:border-ring focus-within:ring-3 focus-within:ring-ring/50">
             <Select
@@ -260,29 +260,29 @@ export default function ContactForm() {
               onChange={(event) => setPhoneNumber(event.target.value)}
               placeholder="999 999 999"
               aria-label="Número de WhatsApp"
-              className="h-full rounded-none border-0 bg-transparent px-3 shadow-none focus-visible:ring-0"
+              className="h-full rounded-none border-0 bg-transparent px-3 shadow-none placeholder:text-[13px] focus-visible:ring-0 sm:placeholder:text-sm"
             />
           </div>
         </div>
-        <label className="grid gap-2 text-sm font-semibold">
+        <label className="grid gap-2 text-sm font-medium">
           Correo electrónico *
           <Input
             name="email"
             type="email"
             autoComplete="email"
             placeholder="nombre@empresa.com"
-            className="h-11 rounded-xl bg-zinc-50"
+            className="h-11 rounded-xl bg-zinc-50 placeholder:text-[13px] sm:placeholder:text-sm"
           />
         </label>
       </div>
 
-      <label className="mt-5 grid gap-2 text-sm font-semibold">
+      <label className="mt-5 grid gap-2 text-sm font-medium">
         Cuéntame sobre el proyecto *
         <Textarea
           name="message"
           rows={6}
           placeholder="Describe tus objetivos, funciones necesarias y cualquier contexto útil..."
-          className="min-h-36 resize-none rounded-xl bg-zinc-50"
+          className="min-h-36 resize-none rounded-xl bg-zinc-50 placeholder:text-[13px] sm:placeholder:text-sm"
         />
       </label>
 
@@ -295,20 +295,31 @@ export default function ContactForm() {
         className="hidden"
       />
 
-      <div className="mt-5 flex items-start gap-3">
+      <div
+        className="mt-5 flex cursor-pointer items-start gap-2"
+        onClick={(event) => {
+          const target = event.target as HTMLElement;
+          const clickedCheckbox =
+            target.closest('[data-slot="checkbox"]') ||
+            (target instanceof HTMLInputElement && target.type === "checkbox");
+
+          if (!clickedCheckbox) setConsent((current) => !current);
+        }}
+      >
         <Checkbox
           id="contact-page-consent"
+          aria-labelledby="contact-page-consent-label"
           checked={consent}
           onCheckedChange={(checked) => setConsent(checked)}
           className="mt-0.5 border-zinc-300 data-checked:border-indigo-600 data-checked:bg-indigo-600 data-checked:text-white"
         />
-        <label
-          htmlFor="contact-page-consent"
-          className="cursor-pointer text-xs leading-5 text-zinc-500"
+        <span
+          id="contact-page-consent-label"
+          className="text-xs leading-5 tracking-tight text-zinc-500"
         >
           Acepto que Nexbloq utilice estos datos únicamente para responder mi
-          consulta. *
-        </label>
+          consulta.*
+        </span>
       </div>
 
       <div className="mt-7 flex flex-col items-start gap-4 sm:flex-row sm:items-center">

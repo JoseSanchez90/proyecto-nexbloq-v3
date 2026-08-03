@@ -61,14 +61,14 @@ const testimonials = [
   {
     quote:
       "Nexbloq entendió lo que necesitaba el negocio y lo convirtió en una experiencia clara, moderna y mucho más fácil de presentar.",
-    name: "Carlos M.",
+    name: "Alexis T.",
     role: "Sitio web corporativo",
   },
   {
     quote:
       "La comunicación directa hizo una gran diferencia. Las ideas se transformaron rápidamente en una solución coherente y bien ejecutada.",
-    name: "Andrea R.",
-    role: "Experiencia digital",
+    name: "Carlos R.",
+    role: "Gestión de buses",
   },
 ];
 
