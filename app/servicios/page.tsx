@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import TechnologyCarousel from "@/components/home/technology-carousel";
 import ServicesAccordion from "@/components/services/services-accordion";
 
 export const metadata: Metadata = {
@@ -53,6 +54,8 @@ export default function ServicesPage() {
             className="absolute inset-0 bg-linear-to-t from-black/30 via-transparent to-black/10"
           />
         </div>
+
+        <TechnologyCarousel />
 
         <blockquote className="mx-auto max-w-5xl py-16 text-center text-2xl font-semibold leading-tight tracking-tight sm:py-20 sm:text-4xl">
           “Priorizo la claridad, la confianza y la comunicación directa para

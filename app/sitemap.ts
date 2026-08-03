@@ -1,4 +1,6 @@
 import type { MetadataRoute } from "next";
+import { projects } from "@/lib/projects";
+import { homeServices } from "@/lib/services";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
@@ -6,6 +8,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
   if (!siteUrl) {
     return [];
   }
+
+  const projectPages: MetadataRoute.Sitemap = projects.map((project) => ({
+    url: new URL(`/proyectos/${project.slug}`, siteUrl).toString(),
+    lastModified: new Date(),
+    changeFrequency: "monthly",
+    priority: 0.8,
+  }));
+
+  const servicePages: MetadataRoute.Sitemap = homeServices.map((service) => ({
+    url: new URL("/servicios/" + service.slug, siteUrl).toString(),
+    lastModified: new Date(),
+    changeFrequency: "monthly",
+    priority: 0.8,
+  }));
 
   return [
     {
@@ -38,5 +54,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.9,
     },
+    ...projectPages,
+    ...servicePages,
   ];
 }

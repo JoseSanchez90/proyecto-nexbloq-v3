@@ -2,43 +2,14 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-
-const services = [
-  {
-    number: "01",
-    title: "Landing pages",
-    description: "Páginas enfocadas en presentar y convertir.",
-    image: "/home/landingpage.webp",
-    imageAlt: "Diseño de una landing page profesional",
-  },
-  {
-    number: "02",
-    title: "Corporativos",
-    description: "Presencias digitales completas para empresas.",
-    image: "/home/corporativo.webp",
-    imageAlt: "Sitio web corporativo desarrollado por Nexbloq",
-  },
-  {
-    number: "03",
-    title: "Rediseño UX/UI",
-    description: "Experiencias más claras, modernas y rápidas.",
-    image: "/home/rediseño.webp",
-    imageAlt: "Proceso de rediseño de experiencia web",
-  },
-  {
-    number: "04",
-    title: "Sistemas web",
-    description: "Herramientas para centralizar y ordenar procesos.",
-    image: "/home/dashboard.webp",
-    imageAlt: "Sistema web personalizado para empresas",
-  },
-];
+import { homeServices } from "@/lib/services";
 
 export default function ServicesSection() {
   const [activeService, setActiveService] = useState<number | null>(null);
   const [previewService, setPreviewService] = useState(0);
-  const selectedService = services[previewService];
+  const selectedService = homeServices[previewService];
   const isPreviewVisible = activeService !== null;
 
   const activateService = (index: number) => {
@@ -75,18 +46,18 @@ export default function ServicesSection() {
         className="relative mt-12 sm:mt-16"
         onMouseLeave={() => setActiveService(null)}
       >
-        {services.map((service, index) => {
+        {homeServices.map((service, index) => {
           const isActive = activeService === index;
 
           return (
-            <article
+            <Link
               key={service.number}
-              tabIndex={0}
+              href={"/servicios/" + service.slug}
+              aria-label={"Ver detalles de " + service.title}
               onMouseEnter={() => activateService(index)}
-              onClick={() => activateService(index)}
               onFocus={() => activateService(index)}
               onBlur={() => setActiveService(null)}
-              className="group relative grid min-h-28 cursor-pointer grid-cols-[2.5rem_minmax(0,1fr)_auto] items-center py-8 outline-none sm:min-h-42 sm:grid-cols-[3.5rem_minmax(0,1fr)_auto]"
+              className="group relative grid min-h-28 cursor-pointer grid-cols-[2.5rem_minmax(0,1fr)_auto] items-center py-8 outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 focus-visible:ring-offset-4 sm:min-h-42 sm:grid-cols-[3.5rem_minmax(0,1fr)_auto]"
             >
               <span
                 className={`self-start pt-2 text-sm font-semibold italic transition-colors duration-300 ${
@@ -158,7 +129,7 @@ export default function ServicesSection() {
                 aria-hidden="true"
                 className="absolute inset-x-0 bottom-0 h-px bg-zinc-200 xl:hidden"
               />
-            </article>
+            </Link>
           );
         })}
 

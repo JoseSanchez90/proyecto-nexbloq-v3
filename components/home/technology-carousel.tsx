@@ -16,16 +16,16 @@ const technologies = [
 
 const technologyLogos = technologies.map(({ name, src }) => ({
   node: (
-    <span className="flex items-center gap-2 text-zinc-900">
+    <span className="flex items-center gap-3 text-zinc-900">
       <img
         src={src}
         alt=""
         width={36}
         height={36}
         aria-hidden
-        className="h-8 w-8 shrink-0 object-contain lg:h-10 lg:w-10"
+        className="h-7 w-7 shrink-0 object-contain sm:h-8 sm:w-8 lg:h-9 lg:w-9"
       />
-      <span className="whitespace-nowrap text-xl font-semibold tracking-tight lg:text-3xl">
+      <span className="whitespace-nowrap text-base font-semibold tracking-tight sm:text-xl lg:text-2xl">
         {name}
       </span>
     </span>
@@ -36,13 +36,13 @@ const technologyLogos = technologies.map(({ name, src }) => ({
 
 export default function TechnologyCarousel() {
   return (
-    <div className="w-full overflow-hidden px-4 py-12 sm:px-6 lg:py-16">
+    <div className="mt-8 w-full overflow-hidden py-7 sm:mt-10 sm:py-9 lg:mt-12 lg:py-10">
       <LogoLoop
         logos={technologyLogos}
-        speed={80}
+        speed={72}
         direction="left"
-        logoHeight={36}
-        gap={56}
+        logoHeight={40}
+        gap={52}
         pauseOnHover={false}
         scaleOnHover={false}
         fadeOut
