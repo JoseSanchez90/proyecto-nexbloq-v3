@@ -10,11 +10,7 @@ interface ProjectCardProps {
 
 export default function ProjectCard({ project }: ProjectCardProps) {
   return (
-    <article
-      className={cn(
-        project.featured && "sm:col-span-2",
-      )}
-    >
+    <article className={cn(project.featured && "sm:col-span-2")}>
       <Link
         href={`/proyectos/${project.slug}`}
         aria-label={`Ver detalles del proyecto ${project.title}`}
@@ -26,7 +22,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           )}
         >
           <Image
-            src={project.image}
+            src={project.cardImage}
             alt={`Vista previa de ${project.title}`}
             fill
             sizes={
@@ -34,7 +30,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                 ? "(max-width: 640px) 100vw, 1280px"
                 : "(max-width: 640px) 100vw, 620px"
             }
-            className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.025]"
+            className="object-cover object-top transition-transform duration-700 ease-out"
           />
 
           <div className="absolute right-5 bottom-5 flex items-center gap-2 rounded-full bg-indigo-500 px-2 py-1 text-sm font-semibold uppercase text-white drop-shadow-md">
@@ -47,11 +43,11 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           </span>
         </div>
 
-        <div className="flex min-h-18 items-center justify-between gap-4 rounded-xl bg-white px-5 py-4 transition-colors duration-300 group-hover:bg-indigo-600 group-focus-visible:bg-indigo-600 sm:px-6">
-          <h3 className="text-xs font-semibold uppercase tracking-[0.04em] text-zinc-950 transition-colors duration-300 group-hover:text-white group-focus-visible:text-white sm:text-lg">
+        <div className="flex min-h-18 items-center justify-between gap-4 rounded-xl bg-white px-5 py-4 transition-all duration-300 group-hover:bg-indigo-600 group-focus-visible:bg-indigo-600 sm:px-6">
+          <h3 className="text-xs font-semibold uppercase tracking-[0.04em] text-zinc-950 transition-all duration-300 group-hover:text-white group-focus-visible:text-white sm:text-lg">
             {project.title}
           </h3>
-          <p className="text-xs font-medium text-zinc-950 transition-colors duration-300 group-hover:text-white group-focus-visible:text-white sm:text-lg">
+          <p className="text-xs font-medium text-zinc-950 transition-all duration-300 group-hover:text-white group-focus-visible:text-white sm:text-lg">
             {project.year}
           </p>
         </div>

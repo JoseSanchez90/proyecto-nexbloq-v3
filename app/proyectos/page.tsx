@@ -1,17 +1,58 @@
 import type { Metadata } from "next";
 import FaqSection from "@/components/home/faq-section";
 import ProjectCard from "@/components/projects/project-card";
+import JsonLd from "@/components/seo/json-ld";
 import { projects } from "@/lib/projects";
+import {
+  absoluteUrl,
+  createBreadcrumbStructuredData,
+  createPageMetadata,
+  siteConfig,
+} from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Proyectos | Nexbloq",
+export const metadata: Metadata = createPageMetadata({
+  title: "Proyectos de desarrollo web y sistemas",
   description:
-    "Explora los proyectos de diseño y desarrollo web creados por Nexbloq para negocios, profesionales y equipos.",
+    "Portafolio de páginas web, landing pages, sitios corporativos y sistemas desarrollados por Nexbloq para empresas y profesionales.",
+  path: "/proyectos",
+  keywords: [
+    "portafolio desarrollo web",
+    "proyectos páginas web",
+    "proyectos sistemas web",
+  ],
+});
+
+const projectsStructuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      name: "Proyectos de desarrollo web de Nexbloq",
+      description:
+        "Portafolio de páginas web, landing pages, sitios corporativos y sistemas web.",
+      url: absoluteUrl("/proyectos"),
+      inLanguage: siteConfig.language,
+      mainEntity: {
+        "@type": "ItemList",
+        itemListElement: projects.map((project, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          url: absoluteUrl(`/proyectos/${project.slug}`),
+          name: project.title,
+        })),
+      },
+    },
+    createBreadcrumbStructuredData([
+      { name: "Inicio", path: "/" },
+      { name: "Proyectos", path: "/proyectos" },
+    ]),
+  ],
 };
 
 export default function ProjectsPage() {
   return (
     <div className="flex flex-col items-center bg-zinc-100 px-4">
+      <JsonLd data={projectsStructuredData} />
       <section
         id="proyectos"
         className="showcase-grid flex min-h-96 w-full max-w-7xl scroll-mt-17 flex-col items-center justify-center rounded-xl bg-white px-5 py-16 text-center sm:scroll-mt-19 sm:px-10 sm:py-20 lg:scroll-mt-24 lg:px-12"

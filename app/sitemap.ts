@@ -1,60 +1,72 @@
 import type { MetadataRoute } from "next";
 import { projects } from "@/lib/projects";
 import { homeServices } from "@/lib/services";
+import { absoluteUrl } from "@/lib/seo";
+
+const lastSignificantUpdate = new Date("2026-08-03T00:00:00-05:00");
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
-
-  if (!siteUrl) {
-    return [];
-  }
-
   const projectPages: MetadataRoute.Sitemap = projects.map((project) => ({
-    url: new URL(`/proyectos/${project.slug}`, siteUrl).toString(),
-    lastModified: new Date(),
+    url: absoluteUrl(`/proyectos/${project.slug}`),
+    lastModified: lastSignificantUpdate,
     changeFrequency: "monthly",
     priority: 0.8,
+    images: [project.image, ...project.gallery].map(absoluteUrl),
   }));
 
   const servicePages: MetadataRoute.Sitemap = homeServices.map((service) => ({
-    url: new URL("/servicios/" + service.slug, siteUrl).toString(),
-    lastModified: new Date(),
+    url: absoluteUrl(`/servicios/${service.slug}`),
+    lastModified: lastSignificantUpdate,
     changeFrequency: "monthly",
-    priority: 0.8,
+    priority: 0.9,
+    images: [absoluteUrl(service.image)],
   }));
 
   return [
     {
-      url: new URL("/", siteUrl).toString(),
-      lastModified: new Date(),
-      changeFrequency: "monthly",
+      url: absoluteUrl("/"),
+      lastModified: lastSignificantUpdate,
+      changeFrequency: "weekly",
       priority: 1,
+      images: [absoluteUrl("/logo/Logo1.png")],
     },
     {
-      url: new URL("/sobre-mi", siteUrl).toString(),
-      lastModified: new Date(),
+      url: absoluteUrl("/servicios"),
+      lastModified: lastSignificantUpdate,
       changeFrequency: "monthly",
-      priority: 0.8,
+      priority: 0.95,
     },
+    ...servicePages,
     {
-      url: new URL("/proyectos", siteUrl).toString(),
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.9,
-    },
-    {
-      url: new URL("/servicios", siteUrl).toString(),
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.9,
-    },
-    {
-      url: new URL("/contacto", siteUrl).toString(),
-      lastModified: new Date(),
+      url: absoluteUrl("/proyectos"),
+      lastModified: lastSignificantUpdate,
       changeFrequency: "monthly",
       priority: 0.9,
     },
     ...projectPages,
-    ...servicePages,
+    {
+      url: absoluteUrl("/sobre-mi"),
+      lastModified: lastSignificantUpdate,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: absoluteUrl("/contacto"),
+      lastModified: lastSignificantUpdate,
+      changeFrequency: "yearly",
+      priority: 0.8,
+    },
+    {
+      url: absoluteUrl("/politicas-de-privacidad"),
+      lastModified: lastSignificantUpdate,
+      changeFrequency: "yearly",
+      priority: 0.3,
+    },
+    {
+      url: absoluteUrl("/terminos-y-condiciones"),
+      lastModified: lastSignificantUpdate,
+      changeFrequency: "yearly",
+      priority: 0.3,
+    },
   ];
 }

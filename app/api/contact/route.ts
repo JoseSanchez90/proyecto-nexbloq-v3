@@ -1,5 +1,9 @@
 import { Resend } from "resend";
 import { contactInfo } from "@/lib/contact";
+import {
+  isPhoneCountryIso,
+  isValidLocalPhone,
+} from "@/lib/contact-validation";
 
 type ContactPayload = Record<string, unknown>;
 
@@ -28,18 +32,28 @@ export async function POST(request: Request) {
     const company = text(payload.company, 160);
     const email = text(payload.email, 254);
     const phone = text(payload.phone, 40);
+    const phoneCountry = text(payload.phoneCountry, 2);
+    const phoneLocal = text(payload.phoneLocal, 15);
     const service = text(payload.service, 120);
     const budget = text(payload.budget, 120);
     const timeframe = text(payload.timeframe, 120);
     const references = text(payload.references, 500);
     const message = text(payload.message, 5_000);
     const consent = payload.consent === true;
+    const hasInvalidPhone =
+      phone.length > 0 &&
+      (!isPhoneCountryIso(phoneCountry) ||
+        !isValidLocalPhone(phoneCountry, phoneLocal));
 
     if (
       name.length < 2 ||
+      !/^[\p{L}\p{M}\s.'’\-]+$/u.test(name) ||
+      (company.length > 0 &&
+        !/^[\p{L}\p{M}\p{N}\s&.,'’()\-]+$/u.test(company)) ||
       !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ||
       !service ||
       message.length < 20 ||
+      hasInvalidPhone ||
       !consent
     ) {
       return Response.json(

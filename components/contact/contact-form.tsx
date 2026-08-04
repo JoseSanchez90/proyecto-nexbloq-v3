@@ -34,6 +34,13 @@ import {
   SelectTrigger,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import {
+  isValidLocalPhone,
+  phoneRules,
+  sanitizeCompanyName,
+  sanitizePersonName,
+  type PhoneCountryIso,
+} from "@/lib/contact-validation";
 
 const serviceOptions = [
   "Landing page",
@@ -84,6 +91,8 @@ export default function ContactForm() {
     latinAmericanCountries.find(
       (country) => country.iso === selectedCountryIso,
     ) ?? latinAmericanCountries[17];
+  const selectedPhoneRule = phoneRules[selectedCountryIso as PhoneCountryIso];
+  const maxPhoneLength = Math.max(...selectedPhoneRule.lengths);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -94,17 +103,23 @@ export default function ContactForm() {
     const name = String(formData.get("name") ?? "").trim();
     const email = String(formData.get("email") ?? "").trim();
     const message = String(formData.get("message") ?? "").trim();
+    const hasInvalidPhone =
+      phoneNumber.length > 0 &&
+      !isValidLocalPhone(selectedCountryIso as PhoneCountryIso, phoneNumber);
     if (
       name.length < 2 ||
+      !/^[\p{L}\p{M}\s.'’\-]+$/u.test(name) ||
       !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ||
       !selectedService ||
       message.length < 20 ||
+      hasInvalidPhone ||
       !consent
     ) {
       setStatus({
         kind: "error",
-        message:
-          "Completa los campos obligatorios, selecciona un servicio y acepta el uso de tus datos.",
+        message: hasInvalidPhone
+          ? `El número de ${selectedCountry.name} debe tener ${selectedPhoneRule.label} y contener solo números.`
+          : "Completa correctamente los campos obligatorios (*), selecciona un servicio y acepta el uso de tus datos.",
       });
       return;
     }
@@ -112,7 +127,7 @@ export default function ContactForm() {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch("/api/contact", {
+      const response = await fetch("/api/send-contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -121,6 +136,8 @@ export default function ContactForm() {
           phone: phoneNumber.trim()
             ? `${selectedCountry.dialCode} ${phoneNumber.trim()}`
             : "",
+          phoneCountry: selectedCountryIso,
+          phoneLocal: phoneNumber,
           company: String(formData.get("company") ?? "").trim(),
           service: selectedService,
           message,
@@ -129,10 +146,16 @@ export default function ContactForm() {
         }),
       });
 
-      const result = (await response.json()) as { error?: string };
+      const result = (await response.json()) as {
+        success?: boolean;
+        message?: string;
+        error?: string;
+      };
 
-      if (!response.ok) {
-        throw new Error(result.error || "No fue posible enviar el mensaje.");
+      if (!response.ok || result.success === false) {
+        throw new Error(
+          result.message || result.error || "No fue posible enviar el mensaje.",
+        );
       }
 
       form.reset();
@@ -164,7 +187,7 @@ export default function ContactForm() {
         <p className="text-sm font-semibold">
           ¿Qué tipo de proyecto necesitas? *
         </p>
-        <div className="mt-4 flex flex-wrap gap-2">
+        <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2">
           {serviceOptions.map((service) => {
             const isSelected = selectedService === service;
 
@@ -174,7 +197,7 @@ export default function ContactForm() {
                 type="button"
                 onClick={() => setSelectedService(service)}
                 aria-pressed={isSelected}
-                className={`min-h-10 cursor-pointer rounded-full px-4 py-2 text-xs font-medium transition-colors sm:min-h-11 ${
+                className={`min-h-10 cursor-pointer rounded-full px-4 py-2 text-xs font-medium transition-all sm:min-h-11 ${
                   isSelected
                     ? "bg-indigo-600 text-white"
                     : "bg-zinc-100 text-zinc-600 hover:bg-indigo-400 hover:text-white"
@@ -194,6 +217,15 @@ export default function ContactForm() {
             name="name"
             autoComplete="name"
             placeholder="Tu nombre"
+            required
+            minLength={2}
+            maxLength={80}
+            pattern="[A-Za-zÁÉÍÓÚáéíóúÑñÜüÀ-ÿ' .-]{2,80}"
+            onInput={(event) => {
+              event.currentTarget.value = sanitizePersonName(
+                event.currentTarget.value,
+              );
+            }}
             className="h-11 rounded-xl bg-zinc-50 placeholder:text-[13px] sm:placeholder:text-sm"
           />
         </label>
@@ -203,6 +235,12 @@ export default function ContactForm() {
             name="company"
             autoComplete="organization"
             placeholder="Nombre de tu empresa"
+            maxLength={120}
+            onInput={(event) => {
+              event.currentTarget.value = sanitizeCompanyName(
+                event.currentTarget.value,
+              );
+            }}
             className="h-11 rounded-xl bg-zinc-50 placeholder:text-[13px] sm:placeholder:text-sm"
           />
         </label>
@@ -211,7 +249,11 @@ export default function ContactForm() {
           <div className="flex h-11 min-w-0 overflow-hidden rounded-xl border border-input bg-zinc-50 transition-[border-color,box-shadow] focus-within:border-ring focus-within:ring-3 focus-within:ring-ring/50">
             <Select
               value={selectedCountryIso}
-              onValueChange={(value) => setSelectedCountryIso(value ?? "PE")}
+              onValueChange={(value) => {
+                setSelectedCountryIso(value ?? "PE");
+                setPhoneNumber("");
+                setStatus(null);
+              }}
             >
               <SelectTrigger
                 aria-label="Seleccionar código de país"
@@ -254,15 +296,29 @@ export default function ContactForm() {
               id="contact-phone"
               name="phoneLocal"
               type="tel"
-              inputMode="tel"
+              inputMode="numeric"
               autoComplete="tel-national"
               value={phoneNumber}
-              onChange={(event) => setPhoneNumber(event.target.value)}
-              placeholder="999 999 999"
+              onChange={(event) => {
+                const digits = event.target.value.replace(/\D/g, "");
+                setPhoneNumber(digits.slice(0, maxPhoneLength));
+                setStatus(null);
+              }}
+              minLength={Math.min(...selectedPhoneRule.lengths)}
+              maxLength={maxPhoneLength}
+              pattern="[0-9]*"
+              placeholder={"9".repeat(maxPhoneLength)}
               aria-label="Número de WhatsApp"
+              aria-describedby="contact-phone-help"
               className="h-full rounded-none border-0 bg-transparent px-3 shadow-none placeholder:text-[13px] focus-visible:ring-0 sm:placeholder:text-sm"
             />
           </div>
+          <p
+            id="contact-phone-help"
+            className="text-xs font-normal text-zinc-500"
+          >
+            {selectedCountry.name}: {selectedPhoneRule.label}, solo números.
+          </p>
         </div>
         <label className="grid gap-2 text-sm font-medium">
           Correo electrónico *
@@ -271,6 +327,8 @@ export default function ContactForm() {
             type="email"
             autoComplete="email"
             placeholder="nombre@empresa.com"
+            required
+            maxLength={254}
             className="h-11 rounded-xl bg-zinc-50 placeholder:text-[13px] sm:placeholder:text-sm"
           />
         </label>
@@ -282,6 +340,9 @@ export default function ContactForm() {
           name="message"
           rows={6}
           placeholder="Describe tus objetivos, funciones necesarias y cualquier contexto útil..."
+          required
+          minLength={20}
+          maxLength={2000}
           className="min-h-36 resize-none rounded-xl bg-zinc-50 placeholder:text-[13px] sm:placeholder:text-sm"
         />
       </label>
@@ -333,7 +394,7 @@ export default function ContactForm() {
         {status && (
           <p
             role={status.kind === "error" ? "alert" : "status"}
-            className={`text-sm leading-6 ${
+            className={`text-xs lg:text-sm leading-6 ${
               status.kind === "error" ? "text-red-600" : "text-emerald-600"
             }`}
           >

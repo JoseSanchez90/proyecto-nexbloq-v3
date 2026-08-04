@@ -5,84 +5,74 @@ import Navbar from "@/components/main/navbar";
 import Footer from "@/components/main/footer";
 import WhatsAppButton from "@/components/main/whatsapp-button";
 import ScrollReveal from "@/components/main/scroll-reveal";
+import CookieConsentBanner from "@/components/main/cookie-consent-banner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { contactInfo, socialLinks } from "@/lib/contact";
-
-const siteUrlValue = process.env.NEXT_PUBLIC_SITE_URL;
-const siteUrl = siteUrlValue ? new URL(siteUrlValue) : null;
-const title = "Nexbloq | Desarrollo web profesional en Perú";
-const description =
-  "Diseño y desarrollo páginas web, landing pages, sitios corporativos y sistemas personalizados para negocios y profesionales en Perú.";
+import { siteConfig, socialImage } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  metadataBase: siteUrl ?? undefined,
-  applicationName: "Nexbloq",
-  title,
-  description,
+  metadataBase: new URL(siteConfig.url),
+  applicationName: siteConfig.name,
+  title: {
+    default: "Desarrollador web en Lima, Perú | Nexbloq",
+    template: "%s | Nexbloq",
+  },
+  description: siteConfig.description,
   keywords: [
+    "desarrollador web en Lima",
     "desarrollo web en Perú",
     "diseño de páginas web",
-    "desarrollo de landing pages",
-    "páginas web para negocios",
-    "desarrollador web en Lima",
+    "landing pages profesionales",
     "sitios web corporativos",
     "sistemas web personalizados",
-    "rediseño de páginas web",
+    "rediseño UX UI",
   ],
-  authors: [{ name: "Jesús" }],
-  creator: "Nexbloq",
-  publisher: "Nexbloq",
-  alternates: siteUrl ? { canonical: siteUrl } : undefined,
+  authors: [{ name: "José", url: "/sobre-mi" }],
+  creator: siteConfig.name,
+  publisher: siteConfig.name,
+  category: "technology",
+  alternates: {
+    canonical: siteConfig.url,
+    languages: {
+      "es-PE": siteConfig.url,
+    },
+  },
   openGraph: {
     type: "website",
-    locale: "es_PE",
-    siteName: "Nexbloq",
-    title: "Nexbloq — Desarrollo web para negocios",
-    description:
-      "Sitios web modernos, rápidos y desarrollados de acuerdo con los objetivos de tu negocio.",
-    url: siteUrl ?? undefined,
+    locale: siteConfig.locale,
+    siteName: siteConfig.name,
+    title: "Desarrollador web en Lima, Perú | Nexbloq",
+    description: siteConfig.description,
+    url: siteConfig.url,
+    images: [socialImage],
   },
   twitter: {
-    card: "summary",
-    title: "Nexbloq — Desarrollo web para negocios",
-    description:
-      "Sitios web modernos, rápidos y desarrollados de acuerdo con los objetivos de tu negocio.",
+    card: "summary_large_image",
+    title: "Desarrollador web en Lima, Perú | Nexbloq",
+    description: siteConfig.description,
+    images: [socialImage.url],
   },
-  robots: siteUrl
-    ? { index: true, follow: true }
-    : { index: false, follow: false },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  verification: process.env.GOOGLE_SITE_VERIFICATION
+    ? { google: process.env.GOOGLE_SITE_VERIFICATION }
+    : undefined,
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   icons: {
     icon: "/favicon.ico",
   },
-};
-
-const personSchema = {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  name: "Jesús",
-  alternateName: "Nexbloq",
-  jobTitle: "Desarrollador web independiente",
-  description,
-  url: siteUrl?.toString(),
-  email: contactInfo.email,
-  telephone: contactInfo.phoneE164,
-  sameAs: socialLinks.map((social) => social.href),
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "Lima",
-    addressCountry: "PE",
-  },
-  areaServed: {
-    "@type": "Country",
-    name: "Perú",
-  },
-  knowsAbout: [
-    "Desarrollo web",
-    "Diseño de interfaces",
-    "Next.js",
-    "React",
-    "TypeScript",
-  ],
 };
 
 export default function RootLayout({
@@ -91,7 +81,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className={`${poppins.variable} h-full antialiased`}>
+    <html lang="es-PE" className={`${poppins.variable} h-full antialiased`}>
       <head>
         <script
           dangerouslySetInnerHTML={{
@@ -106,14 +96,9 @@ export default function RootLayout({
           <main className="flex-1">{children}</main>
           <Footer />
           <WhatsAppButton />
+          <CookieConsentBanner />
           <ScrollReveal />
         </TooltipProvider>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(personSchema).replace(/</g, "\\u003c"),
-          }}
-        />
       </body>
     </html>
   );

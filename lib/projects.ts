@@ -1,5 +1,6 @@
 export interface Project {
   slug: string;
+  cardImage: string;
   image: string;
   gallery: string[];
   title: string;
@@ -8,6 +9,7 @@ export interface Project {
   client: string;
   date: string;
   tools: string[];
+  demo?: string;
   services: string[];
   introduction: string;
   overview: string;
@@ -19,21 +21,23 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    slug: "freightflow-crm",
-    image: "/projects/freightflow1.webp",
+    slug: "mibuss",
+    cardImage: "/projects/freightflow1.webp",
+    image: "/projects/mibuss/mibuss0.webp",
     gallery: [
-      "/projects/freightflow1.webp",
-      "/projects/freightflow1.webp",
-      "/projects/freightflow1.webp",
-      "/projects/freightflow1.webp",
-      "/projects/freightflow1.webp",
+      "/projects/mibuss/mibuss1.webp",
+      "/projects/mibuss/mibuss2.webp",
+      "/projects/mibuss/mibuss3.webp",
+      "/projects/mibuss/mibuss4.webp",
+      "/projects/mibuss/mibuss5.webp",
     ],
-    title: "FreightFlow CRM",
+    title: "MiBuss CRM",
     category: "Sistema web",
     year: "2026",
-    client: "FreightFlow",
+    client: "MiBuss",
     date: "2026",
     tools: ["Next.js", "TypeScript", "PostgreSQL"],
+    demo: "https://mibuss.vercel.app/login",
     services: ["Estrategia UX", "Diseño de interfaz", "Desarrollo web"],
     introduction:
       "Una plataforma de gestión creada para centralizar la operación comercial y facilitar el seguimiento de cada proceso.",
@@ -48,13 +52,14 @@ export const projects: Project[] = [
   },
   {
     slug: "smile-dental",
-    image: "/projects/smiledental.webp",
+    cardImage: "/projects/smiledental.webp",
+    image: "/projects/smile/smile0.webp",
     gallery: [
-      "/projects/smiledental.webp",
-      "/projects/smiledental.webp",
-      "/projects/smiledental.webp",
-      "/projects/smiledental.webp",
-      "/projects/smiledental.webp",
+      "/projects/smile/smile1.webp",
+      "/projects/smile/smile2.webp",
+      "/projects/smile/smile5.webp",
+      "/projects/smile/smile4.webp",
+      "/projects/smile/smile3.webp",
     ],
     title: "Smile Dental",
     category: "Landing page",
@@ -62,6 +67,7 @@ export const projects: Project[] = [
     client: "Smile Dental",
     date: "2025",
     tools: ["Next.js", "Tailwind CSS", "Figma"],
+    demo: "https://smile-dental-delta.vercel.app/",
     services: ["Dirección visual", "UX/UI", "Desarrollo responsive"],
     introduction:
       "Una landing page cercana y profesional para presentar servicios odontológicos y convertir visitas en consultas.",
@@ -76,13 +82,14 @@ export const projects: Project[] = [
   },
   {
     slug: "eufrosine",
-    image: "/projects/eufrosine.webp",
+    cardImage: "/projects/eufrosine.webp",
+    image: "/projects/eufrosine/eufrosine0.webp",
     gallery: [
-      "/projects/eufrosine.webp",
-      "/projects/eufrosine.webp",
-      "/projects/eufrosine.webp",
-      "/projects/eufrosine.webp",
-      "/projects/eufrosine.webp",
+      "/projects/eufrosine/eufrosine1.webp",
+      "/projects/eufrosine/eufrosine2.webp",
+      "/projects/eufrosine/eufrosine3.webp",
+      "/projects/eufrosine/eufrosine4.webp",
+      "/projects/eufrosine/eufrosine5.webp",
     ],
     title: "Eufrosine",
     category: "Sistema web",
@@ -90,6 +97,7 @@ export const projects: Project[] = [
     client: "Eufrosine",
     date: "2024",
     tools: ["React", "TypeScript", "Supabase"],
+    demo: "https://eufrosinepanel.vercel.app/login",
     services: ["Arquitectura UX", "Sistema de diseño", "Desarrollo web"],
     introduction:
       "Un sistema digital diseñado para convertir procesos complejos en una experiencia sencilla, coherente y fácil de administrar.",
@@ -104,13 +112,14 @@ export const projects: Project[] = [
   },
   {
     slug: "mw-trazo",
-    image: "/projects/mwtrazo.webp",
+    cardImage: "/projects/mwtrazo.webp",
+    image: "/projects/mwtrazo/mwtrazo0.webp",
     gallery: [
-      "/projects/mwtrazo.webp",
-      "/projects/mwtrazo.webp",
-      "/projects/mwtrazo.webp",
-      "/projects/mwtrazo.webp",
-      "/projects/mwtrazo.webp",
+      "/projects/mwtrazo/mwtrazo1.webp",
+      "/projects/mwtrazo/mwtrazo2.webp",
+      "/projects/mwtrazo/mwtrazo3.webp",
+      "/projects/mwtrazo/mwtrazo4.webp",
+      "/projects/mwtrazo/mwtrazo5.webp",
     ],
     title: "MW Trazo",
     category: "Sitio corporativo",
@@ -118,6 +127,7 @@ export const projects: Project[] = [
     client: "MW Trazo",
     date: "2023",
     tools: ["Next.js", "Tailwind CSS", "Figma"],
+    demo: "https://mwtrazo.vercel.app/",
     services: ["Estrategia de contenido", "Diseño web", "Desarrollo frontend"],
     introduction:
       "Un sitio corporativo que presenta la experiencia, los servicios y la propuesta de valor de MW Trazo con mayor claridad.",

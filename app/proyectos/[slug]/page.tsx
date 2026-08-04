@@ -4,8 +4,16 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { notFound } from "next/navigation";
 import ProjectOverviewTabs from "@/components/projects/project-overview-tabs";
+import JsonLd from "@/components/seo/json-ld";
 import { cn } from "@/lib/utils";
 import { getProjectBySlug, projects } from "@/lib/projects";
+import ButtonPrimary from "@/components/ui/buttons/button-primary";
+import {
+  absoluteUrl,
+  createBreadcrumbStructuredData,
+  createPageMetadata,
+  siteConfig,
+} from "@/lib/seo";
 
 type ProjectDetailPageProps = {
   params: Promise<{ slug: string }>;
@@ -31,15 +39,17 @@ export async function generateMetadata({
 
   if (!project) return {};
 
-  return {
-    title: project.title + " | Proyectos Nexbloq",
+  return createPageMetadata({
+    title: `${project.title}: proyecto de ${project.category.toLowerCase()}`,
     description: project.introduction,
-    openGraph: {
-      title: project.title + " | Nexbloq",
-      description: project.introduction,
-      images: [{ url: project.image, alt: project.title }],
-    },
-  };
+    path: `/proyectos/${project.slug}`,
+    keywords: [
+      project.title,
+      project.category,
+      ...project.services,
+      ...project.tools,
+    ],
+  });
 }
 
 export default async function ProjectDetailPage({
@@ -56,8 +66,43 @@ export default async function ProjectDetailPage({
     project.result,
   ];
 
+  const projectStructuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CreativeWork",
+        "@id": `${absoluteUrl(`/proyectos/${project.slug}`)}#project`,
+        name: project.title,
+        headline: `${project.title}, proyecto de ${project.category.toLowerCase()}`,
+        description: project.introduction,
+        url: absoluteUrl(`/proyectos/${project.slug}`),
+        image: [project.image, ...project.gallery].map(absoluteUrl),
+        dateCreated: project.year,
+        inLanguage: siteConfig.language,
+        keywords: [...project.services, ...project.tools].join(", "),
+        creator: {
+          "@id": `${siteConfig.url}/#organization`,
+          "@type": "Organization",
+          name: siteConfig.name,
+        },
+        isPartOf: {
+          "@type": "CollectionPage",
+          name: "Proyectos de Nexbloq",
+          url: absoluteUrl("/proyectos"),
+        },
+        ...(project.demo ? { sameAs: project.demo } : {}),
+      },
+      createBreadcrumbStructuredData([
+        { name: "Inicio", path: "/" },
+        { name: "Proyectos", path: "/proyectos" },
+        { name: project.title, path: `/proyectos/${project.slug}` },
+      ]),
+    ],
+  };
+
   return (
     <div className="flex flex-col items-center bg-zinc-100 px-4 pb-24">
+      <JsonLd data={projectStructuredData} />
       <article className="showcase-grid w-full max-w-7xl rounded-xl bg-white px-5 py-16 sm:px-10 sm:py-20 lg:px-12 lg:py-24">
         <header
           data-scroll-reveal-ignore
@@ -74,7 +119,7 @@ export default async function ProjectDetailPage({
           <div className="flex w-fit items-center gap-2 rounded-full border border-zinc-200 bg-white px-3.5 py-1.5">
             <span className="size-1.5 rounded-full bg-indigo-600" />
             <p className="text-sm font-semibold uppercase tracking-[0.12em] sm:text-base">
-              Proyecto · {project.category}
+              {project.category}
             </p>
           </div>
           <h1 className="mt-7 text-4xl font-semibold uppercase tracking-[-0.045em] sm:text-6xl lg:text-7xl">
@@ -97,26 +142,19 @@ export default async function ProjectDetailPage({
             sizes="(max-width: 1280px) 100vw, 1180px"
             className="object-cover object-top"
           />
-          <span
-            aria-hidden="true"
-            className="absolute inset-0 bg-linear-to-t from-black/25 via-transparent to-black/5"
-          />
-          <span className="absolute bottom-5 left-5 rounded-full bg-indigo-600 px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-white sm:bottom-7 sm:left-7 sm:text-sm">
-            {project.category}
-          </span>
         </div>
 
-        <dl className="mt-3 grid grid-cols-2 overflow-hidden rounded-2xl border border-zinc-200 bg-white sm:grid-cols-4">
-          <div className="border-b border-zinc-200 p-5 sm:border-b-0 sm:p-7">
-            <dt className="text-xs font-semibold uppercase tracking-[0.12em] text-zinc-400">
+        <dl className="mt-12 grid grid-cols-1 overflow-hidden rounded-2xl border border-gray-200 bg-white sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
+          <div className="p-5 sm:p-7">
+            <dt className="text-xs font-semibold uppercase tracking-[0.12em] text-gray-500">
               Cliente
             </dt>
             <dd className="mt-2 text-sm font-medium text-zinc-950 sm:text-base">
               {project.client}
             </dd>
           </div>
-          <div className="border-b border-zinc-200 p-5 sm:border-b-0 sm:p-7">
-            <dt className="text-xs font-semibold uppercase tracking-[0.12em] text-zinc-400">
+          <div className="p-5 sm:p-7">
+            <dt className="text-xs font-semibold uppercase tracking-[0.12em] text-gray-500">
               Fecha
             </dt>
             <dd className="mt-2 text-sm font-medium text-zinc-950 sm:text-base">
@@ -124,7 +162,7 @@ export default async function ProjectDetailPage({
             </dd>
           </div>
           <div className="p-5 sm:p-7">
-            <dt className="text-xs font-semibold uppercase tracking-[0.12em] text-zinc-400">
+            <dt className="text-xs font-semibold uppercase tracking-[0.12em] text-gray-500">
               Servicio
             </dt>
             <dd className="mt-2 text-sm font-medium text-zinc-950 sm:text-base">
@@ -132,12 +170,25 @@ export default async function ProjectDetailPage({
             </dd>
           </div>
           <div className="p-5 sm:p-7">
-            <dt className="text-xs font-semibold uppercase tracking-[0.12em] text-zinc-400">
+            <dt className="text-xs font-semibold uppercase tracking-[0.12em] text-gray-500">
               Herramientas
             </dt>
             <dd className="mt-2 text-sm font-medium text-zinc-950 sm:text-base">
               {project.tools.join(", ")}
             </dd>
+          </div>
+          <div className="p-5 sm:p-7">
+            <dt className="text-xs font-semibold uppercase tracking-[0.12em] text-gray-500">
+              Demo
+            </dt>
+            <ButtonPrimary
+              href={project.demo}
+              target="_blank"
+              rel="noopener"
+              size="xs"
+              text="Visistar Sitio"
+              className="mt-2"
+            />
           </div>
         </dl>
 
@@ -158,8 +209,7 @@ export default async function ProjectDetailPage({
                 id="gallery-title"
                 className="mt-4 text-3xl font-semibold uppercase tracking-[-0.04em] sm:text-5xl"
               >
-                Detalles del{" "}
-                <span className="font-light italic">proyecto.</span>
+                Galeria de <span className="font-light italic">imagenes</span>
               </h2>
             </div>
           </div>

@@ -60,7 +60,7 @@ export default function ServicesSection() {
               className="group relative grid min-h-28 cursor-pointer grid-cols-[2.5rem_minmax(0,1fr)_auto] items-center py-8 outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 focus-visible:ring-offset-4 sm:min-h-42 sm:grid-cols-[3.5rem_minmax(0,1fr)_auto]"
             >
               <span
-                className={`self-start pt-2 text-sm font-semibold italic transition-colors duration-300 ${
+                className={`self-start pt-2 text-sm font-semibold italic transition-all duration-300 ${
                   isActive ? "text-indigo-600" : "text-zinc-400"
                 }`}
               >
@@ -69,7 +69,7 @@ export default function ServicesSection() {
 
               <div className="relative z-10 min-w-0">
                 <h3
-                  className={`text-3xl font-semibold uppercase leading-none tracking-tighter transition-colors duration-300 sm:text-4xl md:text-[2.65rem] lg:text-5xl xl:text-6xl ${
+                  className={`text-3xl font-semibold uppercase leading-none tracking-tighter transition-all duration-300 sm:text-4xl md:text-[2.65rem] lg:text-5xl xl:text-6xl ${
                     isActive ? "text-zinc-950" : "text-zinc-500"
                   }`}
                 >

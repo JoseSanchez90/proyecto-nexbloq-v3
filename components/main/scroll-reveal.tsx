@@ -69,6 +69,26 @@ export default function ScrollReveal() {
       },
     );
 
+    const earlyObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+
+          const element = entry.target as HTMLElement;
+          element.classList.add("is-scroll-revealed");
+          earlyObserver.unobserve(element);
+          finishReveal(
+            element,
+            Number(element.dataset.scrollRevealDelay ?? 0),
+          );
+        });
+      },
+      {
+        threshold: 0.01,
+        rootMargin: "0px 0px 28% 0px",
+      },
+    );
+
     const registered = new Set<HTMLElement>();
 
     const registerGroup = (elements: HTMLElement[], delayStep = 85) => {
@@ -77,7 +97,12 @@ export default function ScrollReveal() {
 
         registered.add(element);
         element.dataset.scrollReveal = "";
-        const delay = Math.min(index * delayStep, 360);
+        const revealEarly = Boolean(
+          element.closest("[data-scroll-reveal-early]"),
+        );
+        const delay = revealEarly
+          ? Math.min(index * 20, 60)
+          : Math.min(index * delayStep, 360);
         element.dataset.scrollRevealDelay = String(delay);
         element.style.setProperty(
           "--scroll-reveal-delay",
@@ -126,7 +151,13 @@ export default function ScrollReveal() {
 
     firstFrame = window.requestAnimationFrame(() => {
       secondFrame = window.requestAnimationFrame(() => {
-        pendingElements.forEach((element) => observer.observe(element));
+        pendingElements.forEach((element) => {
+          const revealEarly = Boolean(
+            element.closest("[data-scroll-reveal-early]"),
+          );
+
+          (revealEarly ? earlyObserver : observer).observe(element);
+        });
       });
     });
 
@@ -135,6 +166,7 @@ export default function ScrollReveal() {
       window.cancelAnimationFrame(secondFrame);
       cleanupTimers.forEach((timer) => window.clearTimeout(timer));
       observer.disconnect();
+      earlyObserver.disconnect();
       registered.forEach((element) => {
         element.removeAttribute("data-scroll-reveal");
         element.removeAttribute("data-scroll-reveal-delay");

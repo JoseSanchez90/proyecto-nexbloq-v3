@@ -1,6 +1,12 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useState, type MouseEvent } from "react";
+import {
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+  type MouseEvent,
+} from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ArrowUpRight } from "lucide-react";
@@ -16,10 +22,14 @@ const navLinks = [
 
 function Navbar() {
   const pathname = usePathname();
+  const previousPathname = useRef(pathname);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
   useLayoutEffect(() => {
+    if (previousPathname.current === pathname) return;
+
+    previousPathname.current = pathname;
     window.scrollTo({ top: 0, left: 0, behavior: "instant" });
   }, [pathname]);
 
@@ -123,15 +133,15 @@ function Navbar() {
       <nav
         aria-label="Navegación principal"
         className={clsx(
-          "pointer-events-auto relative z-10 mx-auto flex max-w-6xl flex-wrap items-center justify-between border px-4 py-3 transition-[max-width,padding,background-color,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] sm:px-6 sm:py-4 lg:flex-nowrap lg:overflow-hidden lg:rounded-b-4xl lg:border-transparent lg:duration-500 lg:will-change-[max-width,padding,background-color,box-shadow]",
+          "pointer-events-auto relative z-10 mx-auto flex max-w-6xl flex-wrap items-center justify-between border px-8 py-3 transition-[max-width,padding,background-color,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] sm:px-6 sm:py-4 lg:flex-nowrap lg:overflow-hidden lg:rounded-full lg:duration-500",
           isMenuOpen
-            ? "overflow-hidden rounded-b-[1.75rem] border-white bg-white shadow-lg"
+            ? "overflow-hidden rounded-4xl bg-white shadow-lg"
             : isScrolled
-              ? "overflow-visible rounded-b-[1.75rem] border-white bg-white shadow-lg"
+              ? "overflow-visible rounded-4xl bg-white/70 backdrop-blur-lg shadow-lg"
               : "overflow-visible rounded-none border-transparent bg-transparent shadow-none",
           isScrolled
-            ? "max-w-sm sm:max-w-md lg:max-w-4xl lg:bg-white/90 lg:px-5 lg:py-3 lg:shadow-xl lg:backdrop-blur-xl"
-            : "max-w-md sm:max-w-3xl lg:max-w-6xl lg:bg-zinc-100/95 lg:px-6 lg:py-4 lg:shadow-none lg:backdrop-blur-none",
+            ? "max-w-sm sm:max-w-md lg:max-w-4xl lg:bg-white/70 lg:px-8 lg:py-3 lg:shadow-xl lg:backdrop-blur-xl mt-2"
+            : "max-w-md sm:max-w-3xl lg:max-w-6xl lg:bg-zinc-100 lg:px-6 lg:py-4 lg:shadow-none lg:backdrop-blur-none",
         )}
       >
         <Link
@@ -307,7 +317,7 @@ function Navbar() {
               href="/contacto"
               scroll={false}
               onClick={() => setIsMenuOpen(false)}
-              className="w-full justify-between font-semibold"
+              className="w-full justify-between font-semibold mt-4"
             />
           </div>
         </div>

@@ -7,6 +7,8 @@ interface ButtonPrimaryProps {
   text?: string;
   href?: string;
   scroll?: boolean;
+  target?: "_blank" | "_self" | "_parent" | "_top";
+  rel?: string;
   className?: string;
   onClick?: () => void;
   type?: "button" | "submit" | "reset";
@@ -80,6 +82,8 @@ export default function ButtonPrimary({
   text = "Hover me",
   href,
   scroll,
+  target,
+  rel,
   className = "",
   onClick,
   type = "button",
@@ -127,6 +131,8 @@ export default function ButtonPrimary({
       <Link
         href={href}
         scroll={scroll}
+        target={target}
+        rel={target === "_blank" ? (rel ?? "noopener noreferrer") : rel}
         onClick={(event) => {
           if (disabled) {
             event.preventDefault();

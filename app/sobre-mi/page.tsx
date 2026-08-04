@@ -9,11 +9,43 @@ import {
 import AboutFaq from "@/components/about/about-faq";
 import ValuesShowcase from "@/components/about/values-showcase";
 import ButtonPrimary from "@/components/ui/buttons/button-primary";
+import JsonLd from "@/components/seo/json-ld";
+import {
+  absoluteUrl,
+  createBreadcrumbStructuredData,
+  createPageMetadata,
+  siteConfig,
+} from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Sobre mí | Nexbloq",
+export const metadata: Metadata = createPageMetadata({
+  title: "Desarrollador web en Lima: sobre Nexbloq",
   description:
-    "Conoce la forma de pensar, los valores y el enfoque con el que Nexbloq diseña y desarrolla soluciones web para negocios.",
+    "Conoce a José, desarrollador web detrás de Nexbloq en Lima, y su enfoque para crear páginas, interfaces y sistemas web a medida para negocios.",
+  path: "/sobre-mi",
+  keywords: [
+    "desarrollador web freelance Lima",
+    "programador web Perú",
+    "diseñador y desarrollador web",
+  ],
+});
+
+const aboutStructuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "AboutPage",
+      name: "Sobre Nexbloq y su desarrollador web",
+      description:
+        "Conoce a José, desarrollador web detrás de Nexbloq en Lima, Perú.",
+      url: absoluteUrl("/sobre-mi"),
+      inLanguage: siteConfig.language,
+      mainEntity: { "@id": `${siteConfig.url}/#founder` },
+    },
+    createBreadcrumbStructuredData([
+      { name: "Inicio", path: "/" },
+      { name: "Sobre mí", path: "/sobre-mi" },
+    ]),
+  ],
 };
 
 const metrics = [
@@ -75,6 +107,7 @@ const testimonials = [
 export default function AboutPage() {
   return (
     <div className="flex flex-col items-center bg-zinc-100 px-4 pb-24">
+      <JsonLd data={aboutStructuredData} />
       <section
         id="sobre-mi"
         className="showcase-grid w-full max-w-7xl scroll-mt-17 overflow-hidden rounded-xl bg-white px-5 py-16 sm:scroll-mt-19 sm:px-10 sm:py-20 lg:scroll-mt-24 lg:px-12 lg:py-24"
@@ -183,23 +216,23 @@ export default function AboutPage() {
               />
 
               <div className="relative z-10 flex items-center gap-4">
-                <span className="flex size-14 shrink-0 items-center justify-center rounded-full bg-indigo-50 text-indigo-600 transition-colors duration-300 group-hover:bg-white">
+                <span className="flex size-14 shrink-0 items-center justify-center rounded-full bg-indigo-50 text-indigo-600 transition-all duration-300 group-hover:bg-white">
                   <Icon aria-hidden="true" className="size-6" />
                 </span>
                 <div>
-                  <p className="text-3xl font-bold leading-none tracking-tight transition-colors duration-300 group-hover:text-white">
+                  <p className="text-3xl font-bold leading-none tracking-tight transition-all duration-300 group-hover:text-white">
                     {metric.value}
                   </p>
-                  <p className="mt-2 text-xs text-zinc-500 transition-colors duration-300 group-hover:text-white/70">
+                  <p className="mt-2 text-xs text-zinc-500 transition-all duration-300 group-hover:text-white/70">
                     {metric.label}
                   </p>
                 </div>
               </div>
-              <div className="relative z-10 mt-14 border-t border-zinc-200 pt-6 transition-colors duration-300 group-hover:border-white/25">
-                <h3 className="text-xl font-semibold leading-tight transition-colors duration-300 group-hover:text-white">
+              <div className="relative z-10 mt-14 border-t border-zinc-200 pt-6 transition-all duration-300 group-hover:border-white/25">
+                <h3 className="text-xl font-semibold leading-tight transition-all duration-300 group-hover:text-white">
                   {metric.title}
                 </h3>
-                <p className="mt-4 text-sm leading-6 text-zinc-500 transition-colors duration-300 group-hover:text-white/70">
+                <p className="mt-4 text-sm leading-6 text-zinc-500 transition-all duration-300 group-hover:text-white/70">
                   {metric.text}
                 </p>
               </div>
@@ -248,23 +281,23 @@ export default function AboutPage() {
           {testimonials.map((testimonial) => (
             <article
               key={testimonial.name}
-              className="group flex min-h-80 flex-col justify-between rounded-2xl bg-white p-6 transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:bg-indigo-600 sm:p-8 md:last:col-span-2 lg:last:col-span-1"
+              className="group flex min-h-80 flex-col justify-between rounded-2xl bg-white p-6 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:bg-indigo-600 sm:p-8 md:last:col-span-2 lg:last:col-span-1"
             >
-              <blockquote className="text-lg font-semibold leading-8 tracking-tight transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-white">
+              <blockquote className="text-lg font-semibold leading-8 tracking-tight transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-white">
                 “{testimonial.quote}”
               </blockquote>
               <div className="mt-10 flex items-end justify-between gap-5">
                 <div>
-                  <p className="text-sm font-semibold uppercase transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-white">
+                  <p className="text-sm font-semibold uppercase transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-white">
                     {testimonial.name}
                   </p>
-                  <p className="mt-1 text-xs text-zinc-500 transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-white/70">
+                  <p className="mt-1 text-xs text-zinc-500 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-white/70">
                     {testimonial.role}
                   </p>
                 </div>
                 <span
                   aria-hidden="true"
-                  className="flex size-12 items-center justify-center rounded-full bg-indigo-600 text-2xl font-semibold text-white transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:bg-white group-hover:text-indigo-600"
+                  className="flex size-12 items-center justify-center rounded-full bg-indigo-600 text-2xl font-semibold text-white transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:bg-white group-hover:text-indigo-600"
                 >
                   ”
                 </span>

@@ -28,7 +28,7 @@ export default function ProjectOverviewTabs({
         id={tabsId + "-panel-" + activeIndex}
         role="tabpanel"
         aria-labelledby={tabsId + "-tab-" + activeIndex}
-        className="order-2 flex min-h-48 items-center overflow-hidden rounded-2xl border border-zinc-200 bg-white p-6 sm:min-h-52 sm:p-10 lg:order-1 lg:min-h-42 lg:px-12"
+        className="order-2 flex min-h-48 items-center overflow-hidden rounded-2xl bg-indigo-500 p-6 sm:min-h-52 sm:p-10 lg:order-1 lg:min-h-42 lg:px-12"
       >
         <AnimatePresence mode="wait" initial={false}>
           <motion.p
@@ -49,7 +49,7 @@ export default function ProjectOverviewTabs({
                 ? { duration: 0 }
                 : { duration: 0.42, ease: [0.22, 1, 0.36, 1] }
             }
-            className="text-sm leading-7 text-zinc-500 sm:text-base sm:leading-8 lg:max-w-3xl lg:text-lg"
+            className="text-sm leading-7 text-white sm:text-base sm:leading-8 lg:max-w-3xl lg:text-lg"
           >
             {activeOption.description}
           </motion.p>

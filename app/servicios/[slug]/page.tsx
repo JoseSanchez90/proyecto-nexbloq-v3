@@ -4,7 +4,14 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { notFound } from "next/navigation";
 import ButtonPrimary from "@/components/ui/buttons/button-primary";
+import JsonLd from "@/components/seo/json-ld";
 import { getServiceBySlug, homeServices } from "@/lib/services";
+import {
+  absoluteUrl,
+  createBreadcrumbStructuredData,
+  createPageMetadata,
+  siteConfig,
+} from "@/lib/seo";
 
 type ServiceDetailPageProps = {
   params: Promise<{ slug: string }>;
@@ -22,15 +29,17 @@ export async function generateMetadata({
 
   if (!service) return {};
 
-  return {
-    title: service.title + " | Servicios Nexbloq",
-    description: service.introduction,
-    openGraph: {
-      title: service.title + " | Nexbloq",
-      description: service.introduction,
-      images: [{ url: service.image, alt: service.imageAlt }],
-    },
-  };
+  return createPageMetadata({
+    title: service.seoTitle,
+    description: service.seoDescription,
+    path: `/servicios/${service.slug}`,
+    keywords: [
+      service.title,
+      `${service.title} Lima`,
+      `${service.title} Perú`,
+      "desarrollo web profesional",
+    ],
+  });
 }
 
 export default async function ServiceDetailPage({
@@ -41,19 +50,54 @@ export default async function ServiceDetailPage({
 
   if (!service) notFound();
 
+  const serviceStructuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Service",
+        "@id": `${absoluteUrl(`/servicios/${service.slug}`)}#service`,
+        name: service.seoTitle,
+        serviceType: service.title,
+        description: service.seoDescription,
+        url: absoluteUrl(`/servicios/${service.slug}`),
+        image: absoluteUrl(service.image),
+        provider: {
+          "@id": `${siteConfig.url}/#organization`,
+          "@type": "Organization",
+          name: siteConfig.name,
+          url: siteConfig.url,
+        },
+        areaServed: {
+          "@type": "Country",
+          name: "Perú",
+        },
+        audience: {
+          "@type": "BusinessAudience",
+          audienceType: "Empresas, profesionales y emprendimientos",
+        },
+      },
+      createBreadcrumbStructuredData([
+        { name: "Inicio", path: "/" },
+        { name: "Servicios", path: "/servicios" },
+        { name: service.title, path: `/servicios/${service.slug}` },
+      ]),
+    ],
+  };
+
   return (
     <div className="flex flex-col items-center bg-zinc-100 px-4 pb-24">
+      <JsonLd data={serviceStructuredData} />
       <article className="showcase-grid w-full max-w-7xl rounded-xl bg-white px-5 py-16 sm:px-10 sm:py-20 lg:px-12 lg:py-24">
         <header
           data-scroll-reveal-ignore
           className="page-intro-reveal mx-auto flex max-w-4xl flex-col items-center text-center"
         >
           <Link
-            href="/servicios"
+            href="/"
             className="mb-10 inline-flex self-start items-center gap-2 text-sm text-zinc-500 transition-colors hover:text-zinc-950"
           >
             <ArrowLeft className="size-4" aria-hidden="true" />
-            Volver a servicios
+            Volver a inicio
           </Link>
 
           <div className="flex w-fit items-center gap-2 rounded-full border border-zinc-200 bg-white px-3.5 py-1.5">
@@ -119,15 +163,15 @@ export default async function ServiceDetailPage({
               {service.steps.map((step, index) => (
                 <li
                   key={step.title}
-                  className="group flex min-h-56 flex-col rounded-2xl border border-zinc-200 bg-white p-6 transition-colors duration-300 hover:bg-indigo-600 sm:p-8"
+                  className="group flex min-h-56 flex-col rounded-2xl border border-zinc-200 bg-white p-6 transition-all duration-300 hover:bg-indigo-600 sm:p-8"
                 >
-                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-indigo-600 text-base font-semibold text-white transition-colors duration-300 group-hover:bg-white group-hover:text-indigo-600">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-indigo-600 text-base font-semibold text-white transition-all duration-300 group-hover:bg-white group-hover:text-indigo-600">
                     {String(index + 1).padStart(2, "0")}
                   </span>
-                  <h3 className="mt-auto pt-10 text-xl font-semibold tracking-tight transition-colors duration-300 group-hover:text-white sm:text-2xl">
+                  <h3 className="mt-auto pt-10 text-xl font-semibold tracking-tight transition-all duration-300 group-hover:text-white sm:text-2xl">
                     {step.title}
                   </h3>
-                  <p className="mt-4 text-sm leading-6 text-zinc-500 transition-colors duration-300 group-hover:text-white sm:text-base">
+                  <p className="mt-4 text-sm leading-6 text-zinc-500 transition-all duration-300 group-hover:text-white sm:text-base">
                     {step.description}
                   </p>
                 </li>

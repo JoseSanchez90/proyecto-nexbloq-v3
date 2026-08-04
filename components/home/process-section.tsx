@@ -44,7 +44,7 @@ export default function ProcessSection() {
   return (
     <section
       id="proceso"
-      className="w-full max-w-7xl scroll-mt-24 rounded-xl bg-white px-5 py-16 sm:px-10 sm:py-20 lg:px-12"
+      className="w-full max-w-7xl scroll-mt-24 mb-24 rounded-xl bg-white px-5 py-16 sm:px-10 sm:py-20 lg:px-12"
     >
       <div className="mx-auto flex max-w-xl flex-col items-center text-center">
         <div className="flex w-fit items-center gap-2 rounded-full border border-zinc-200 bg-white px-3.5 py-1.5">

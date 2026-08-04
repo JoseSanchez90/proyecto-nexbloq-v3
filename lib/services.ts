@@ -7,6 +7,8 @@ export type ServiceDetail = {
   number: string;
   slug: string;
   title: string;
+  seoTitle: string;
+  seoDescription: string;
   description: string;
   image: string;
   imageAlt: string;
@@ -21,6 +23,9 @@ export const homeServices: ServiceDetail[] = [
     number: "01",
     slug: "landing-pages",
     title: "Landing pages",
+    seoTitle: "Landing pages profesionales en Lima, Perú",
+    seoDescription:
+      "Diseño y desarrollo de landing pages rápidas, responsive y orientadas a generar consultas, registros o ventas para negocios en Perú.",
     description: "Páginas enfocadas en presentar y convertir.",
     image: "/home/landingpage.webp",
     imageAlt: "Diseño de una landing page profesional",
@@ -57,6 +62,9 @@ export const homeServices: ServiceDetail[] = [
     number: "02",
     slug: "sitios-corporativos",
     title: "Corporativos",
+    seoTitle: "Sitios web corporativos en Lima, Perú",
+    seoDescription:
+      "Diseño y desarrollo de sitios web corporativos profesionales que presentan servicios, fortalecen la confianza y generan oportunidades comerciales.",
     description: "Presencias digitales completas para empresas.",
     image: "/home/corporativo.webp",
     imageAlt: "Sitio web corporativo desarrollado por Nexbloq",
@@ -93,6 +101,9 @@ export const homeServices: ServiceDetail[] = [
     number: "03",
     slug: "rediseno-ux-ui",
     title: "Rediseño UX/UI",
+    seoTitle: "Rediseño UX/UI de páginas y sistemas web",
+    seoDescription:
+      "Rediseño UX/UI para mejorar la claridad, usabilidad, velocidad y conversión de páginas, plataformas y sistemas web existentes.",
     description: "Experiencias más claras, modernas y rápidas.",
     image: "/home/rediseño.webp",
     imageAlt: "Proceso de rediseño de experiencia web",
@@ -129,6 +140,9 @@ export const homeServices: ServiceDetail[] = [
     number: "04",
     slug: "sistemas-web",
     title: "Sistemas web",
+    seoTitle: "Desarrollo de sistemas web personalizados en Perú",
+    seoDescription:
+      "Desarrollo de sistemas web a medida para centralizar información, automatizar tareas y optimizar procesos de empresas y equipos.",
     description: "Herramientas para centralizar y ordenar procesos.",
     image: "/home/dashboard.webp",
     imageAlt: "Sistema web personalizado para empresas",

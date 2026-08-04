@@ -2,16 +2,64 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import TechnologyCarousel from "@/components/home/technology-carousel";
 import ServicesAccordion from "@/components/services/services-accordion";
+import JsonLd from "@/components/seo/json-ld";
+import { homeServices } from "@/lib/services";
+import {
+  absoluteUrl,
+  createBreadcrumbStructuredData,
+  createPageMetadata,
+  siteConfig,
+} from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Servicios | Nexbloq",
+export const metadata: Metadata = createPageMetadata({
+  title: "Servicios de desarrollo web en Lima, Perú",
   description:
-    "Servicios de diseño y desarrollo web: landing pages, sitios corporativos, rediseño UX/UI, sistemas web, mantenimiento e infraestructura.",
+    "Landing pages, sitios corporativos, rediseño UX/UI y sistemas web personalizados para empresas y profesionales en Lima y todo el Perú.",
+  path: "/servicios",
+  keywords: [
+    "servicios de desarrollo web",
+    "diseño web Lima",
+    "programación web Perú",
+    "sistemas web para empresas",
+  ],
+});
+
+const servicesStructuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      name: "Servicios de desarrollo web de Nexbloq",
+      description:
+        "Landing pages, sitios corporativos, rediseño UX/UI y sistemas web personalizados.",
+      url: absoluteUrl("/servicios"),
+      inLanguage: siteConfig.language,
+      mainEntity: {
+        "@type": "ItemList",
+        itemListElement: homeServices.map((service, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          url: absoluteUrl(`/servicios/${service.slug}`),
+          item: {
+            "@type": "Service",
+            name: service.seoTitle,
+            description: service.seoDescription,
+            provider: { "@id": `${siteConfig.url}/#organization` },
+          },
+        })),
+      },
+    },
+    createBreadcrumbStructuredData([
+      { name: "Inicio", path: "/" },
+      { name: "Servicios", path: "/servicios" },
+    ]),
+  ],
 };
 
 export default function ServicesPage() {
   return (
     <div className="flex flex-col items-center bg-zinc-100 px-4 pb-24">
+      <JsonLd data={servicesStructuredData} />
       <section
         id="servicios"
         className="showcase-grid w-full max-w-7xl scroll-mt-17 rounded-xl bg-white px-5 py-16 sm:scroll-mt-19 sm:px-10 sm:py-20 lg:scroll-mt-24 lg:px-12 lg:py-24"

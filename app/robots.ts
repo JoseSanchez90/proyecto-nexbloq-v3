@@ -1,9 +1,10 @@
 import type { MetadataRoute } from "next";
+import { siteConfig } from "@/lib/seo";
 
 export default function robots(): MetadataRoute.Robots {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+  const isPreviewDeployment = process.env.VERCEL_ENV === "preview";
 
-  if (!siteUrl) {
+  if (isPreviewDeployment) {
     return {
       rules: {
         userAgent: "*",
@@ -12,14 +13,13 @@ export default function robots(): MetadataRoute.Robots {
     };
   }
 
-  const origin = new URL(siteUrl).origin;
-
   return {
     rules: {
       userAgent: "*",
       allow: "/",
+      disallow: ["/api/"],
     },
-    sitemap: `${origin}/sitemap.xml`,
-    host: origin,
+    sitemap: `${siteConfig.url}/sitemap.xml`,
+    host: siteConfig.url,
   };
 }

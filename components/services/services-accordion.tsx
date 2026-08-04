@@ -87,7 +87,7 @@ export default function ServicesAccordion() {
               className="group flex min-h-20 w-full items-center gap-4 py-5 text-left sm:min-h-24 sm:gap-8"
             >
               <span
-                className={`flex size-10 shrink-0 items-center justify-center rounded-full transition-colors duration-300 ${
+                className={`flex size-10 shrink-0 items-center justify-center rounded-full transition-all duration-300 ${
                   isActive
                     ? "bg-indigo-600 text-white"
                     : "bg-zinc-100 text-zinc-600 group-hover:bg-indigo-600 group-hover:text-white"
@@ -100,7 +100,7 @@ export default function ServicesAccordion() {
                 )}
               </span>
               <h2
-                className={`text-xl font-semibold tracking-tight transition-colors duration-300 sm:text-3xl lg:text-5xl ${
+                className={`text-xl font-semibold tracking-tight transition-all duration-300 sm:text-3xl lg:text-5xl ${
                   isActive
                     ? "text-indigo-600"
                     : "text-zinc-900 group-hover:text-indigo-600"

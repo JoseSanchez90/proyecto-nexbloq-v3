@@ -1,20 +1,55 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { Mail, MessageCircle } from "lucide-react";
 import ContactForm from "@/components/contact/contact-form";
-import { contactInfo } from "@/lib/contact";
+import JsonLd from "@/components/seo/json-ld";
 import clsx from "clsx";
 import { museomoderno } from "@/lib/fonts";
+import { contactInfo } from "@/lib/contact";
+import {
+  absoluteUrl,
+  createBreadcrumbStructuredData,
+  createPageMetadata,
+  siteConfig,
+} from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Contacto | Nexbloq",
+export const metadata: Metadata = createPageMetadata({
+  title: "Contactar a un desarrollador web en Lima",
   description:
-    "Cuéntame sobre tu próximo proyecto web y recibe una recomendación clara sobre el mejor camino para desarrollarlo.",
+    "Contacta con Nexbloq para cotizar una página web, landing page, sitio corporativo o sistema web personalizado en Lima y todo el Perú.",
+  path: "/contacto",
+});
+
+const contactStructuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ContactPage",
+      name: "Contacto de Nexbloq",
+      description:
+        "Contacto para cotizar páginas web y sistemas web personalizados.",
+      url: absoluteUrl("/contacto"),
+      inLanguage: siteConfig.language,
+      about: { "@id": `${siteConfig.url}/#organization` },
+      mainEntity: {
+        "@type": "ContactPoint",
+        contactType: "ventas y consultas de proyectos web",
+        email: contactInfo.email,
+        telephone: contactInfo.phoneE164,
+        availableLanguage: "Spanish",
+        areaServed: "PE",
+      },
+    },
+    createBreadcrumbStructuredData([
+      { name: "Inicio", path: "/" },
+      { name: "Contacto", path: "/contacto" },
+    ]),
+  ],
 };
 
 export default function ContactPage() {
   return (
     <div className="flex flex-col items-center bg-zinc-100 px-4 pb-24">
+      <JsonLd data={contactStructuredData} />
       <section
         id="contacto"
         className="showcase-grid w-full max-w-7xl scroll-mt-17 rounded-xl bg-white px-5 py-16 sm:scroll-mt-19 sm:px-10 sm:py-20 lg:scroll-mt-24 lg:px-12 lg:py-24"

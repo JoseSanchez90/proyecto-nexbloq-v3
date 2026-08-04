@@ -69,7 +69,7 @@ export default function FaqSection() {
               type="button"
               onClick={() => setActiveIndex(index)}
               aria-pressed={activeIndex === index}
-              className={`flex min-h-14 items-center justify-between gap-4 rounded-lg border px-5 text-left text-sm cursor-pointer transition-colors ${
+              className={`flex min-h-14 items-center justify-between gap-4 rounded-lg border px-5 text-left text-sm cursor-pointer transition-all ${
                 activeIndex === index
                   ? "border-indigo-600 bg-indigo-600 text-white"
                   : "border-zinc-200 bg-white text-zinc-700 hover:border-zinc-400"

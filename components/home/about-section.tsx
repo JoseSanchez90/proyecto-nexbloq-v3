@@ -48,7 +48,7 @@ export default function AboutSection() {
     >
       <div className="grid items-start gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14">
         <div className="order-2 lg:sticky lg:top-24 lg:order-1">
-          <div className="relative min-h-128 overflow-hidden rounded-xl sm:min-h-206 lg:min-h-148">
+          <div className="relative min-h-82 overflow-hidden rounded-xl sm:min-h-206 lg:min-h-144">
             <Image
               src="/home/about.webp"
               alt="Diseño y desarrollo web realizado por Nexbloq"

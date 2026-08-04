@@ -87,21 +87,21 @@ html {
 }
 
 .hero-showcase-slider {
-  --showcase-exit-left: -181%;
-  --showcase-left-left: -86%;
-  --showcase-center-left: 9%;
-  --showcase-right-left: 104%;
-  --showcase-queued-left: 199%;
+  --showcase-exit-left: -194%;
+  --showcase-left-left: -94%;
+  --showcase-center-left: 6%;
+  --showcase-right-left: 112%;
+  --showcase-queued-left: 212%;
   --showcase-side-top: 12px;
   --showcase-side-width: 82%;
   --showcase-side-height: auto;
   --showcase-side-transform: translateY(0);
   --showcase-center-top: 12px;
-  --showcase-center-width: 82%;
+  --showcase-center-width: 88%;
   --showcase-center-height: auto;
-  --showcase-frame-left: calc(9% - 10px);
+  --showcase-frame-left: calc(6% - 8px);
   --showcase-frame-top: 6px;
-  --showcase-frame-width: calc(82% + 20px);
+  --showcase-frame-width: calc(88% + 16px);
   --showcase-frame-height: auto;
 }
 

@@ -109,7 +109,7 @@ export default function HeroShowcaseSlider({
           className="absolute overflow-hidden rounded-lg bg-white"
           style={{
             ...itemPositions[index],
-            aspectRatio: "1586 / 992",
+            aspectRatio: "1600 / 1000",
             transition: transitionEnabled
               ? `left ${TRANSITION_TIME}ms cubic-bezier(0.76, 0, 0.24, 1), top ${TRANSITION_TIME}ms cubic-bezier(0.76, 0, 0.24, 1), width ${TRANSITION_TIME}ms cubic-bezier(0.76, 0, 0.24, 1), height ${TRANSITION_TIME}ms cubic-bezier(0.76, 0, 0.24, 1), transform ${TRANSITION_TIME}ms cubic-bezier(0.76, 0, 0.24, 1), opacity 420ms ease`
               : "none",
@@ -120,7 +120,7 @@ export default function HeroShowcaseSlider({
             alt={image.alt}
             fill
             priority
-            sizes="(max-width: 639px) 82vw, 480px"
+            sizes="(max-width: 639px) 88vw, 480px"
             className="object-contain object-center"
           />
         </div>
@@ -141,8 +141,8 @@ export default function HeroShowcaseSlider({
       >
         <span className="absolute -left-1 -top-1 h-[15%] w-[12%] rounded-tl-xl border-l-3 border-t-3 border-indigo-600" />
         <span className="absolute -right-1 -top-1 h-[15%] w-[12%] rounded-tr-xl border-r-3 border-t-3 border-indigo-600" />
-        <span className="absolute -bottom-1 -left-1 h-[15%] w-[12%] rounded-bl-xl border-b-3 border-l-3 border-indigo-600" />
-        <span className="absolute -bottom-1 -right-1 h-[15%] w-[12%] rounded-br-xl border-b-3 border-r-3 border-indigo-600" />
+        <span className="absolute -bottom-2 -left-1 h-[15%] w-[12%] rounded-bl-xl border-b-3 border-l-3 border-indigo-600" />
+        <span className="absolute -bottom-2 -right-1 h-[15%] w-[12%] rounded-br-xl border-b-3 border-r-3 border-indigo-600" />
       </div>
     </div>
   );
