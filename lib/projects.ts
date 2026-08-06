@@ -81,6 +81,36 @@ export const projects: Project[] = [
       "Una presencia digital clara y adaptable que facilita el descubrimiento de servicios y el inicio de una conversación.",
   },
   {
+    slug: "hospital-florencia",
+    cardImage: "/projects/hospital-florencia.webp",
+    image: "/projects/florencia/hospital-florencia0.webp",
+    gallery: [
+      "/projects/florencia/hospital-florencia1.webp",
+      "/projects/florencia/hospital-florencia2.webp",
+      "/projects/florencia/hospital-florencia3.webp",
+      "/projects/florencia/hospital-florencia4.webp",
+      "/projects/florencia/hospital-florencia5.webp",
+    ],
+    title: "Hospital Florencia",
+    category: "Gestion hospitalaria",
+    year: "2026",
+    client: "Hospital Florencia",
+    date: "2026",
+    tools: ["Next.js", "TypeScript", "Firebase"],
+    demo: "https://florencia-panel.vercel.app/",
+    services: ["Estrategia UX", "Diseño de interfaz", "Desarrollo web"],
+    introduction:
+      "Una plataforma de gestión hospitalaria creada para centralizar la operación hospitalaria y facilitar el seguimiento de cada proceso.",
+    overview:
+      "El Hospital Florencia transforma información dispersa en una experiencia de trabajo clara. El proyecto reúne pacientes, historias clínicas y tareas dentro de una interfaz consistente, preparada para crecer junto con la operación.",
+    challenge:
+      "Organizar procesos clínicos y administrativos con múltiples estados y responsables sin añadir complejidad al trabajo diario del equipo.",
+    solution:
+      "Diseñamos una arquitectura modular, paneles de lectura rápida y recorridos centrados en las acciones más frecuentes.",
+    result:
+      "Una herramienta más ordenada y escalable, con mejor visibilidad sobre la actividad hospitalaria y sus prioridades.",
+  },
+  {
     slug: "eufrosine",
     cardImage: "/projects/eufrosine.webp",
     image: "/projects/eufrosine/eufrosine0.webp",
