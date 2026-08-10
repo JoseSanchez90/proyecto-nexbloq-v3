@@ -210,7 +210,7 @@ export default function ContactForm() {
         </div>
       </div>
 
-      <div className="mt-8 grid gap-5 sm:grid-cols-2">
+      <div className="mt-8 grid items-start gap-5 sm:grid-cols-2">
         <label className="grid gap-2 text-sm font-medium">
           Nombre *
           <Input
