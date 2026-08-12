@@ -101,7 +101,7 @@ export default function ContactPage() {
 
             <div className="relative mt-8 min-h-80 sm:min-h-126 flex-1 overflow-hidden rounded-2xl bg-zinc-100 lg:min-h-96">
               <Image
-                src="/profile/me.png"
+                src="/profile/me1.png"
                 alt="Conversación y planificación de un proyecto digital"
                 fill
                 priority

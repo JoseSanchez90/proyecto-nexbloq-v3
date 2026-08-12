@@ -170,6 +170,36 @@ export const projects: Project[] = [
     result:
       "Un sitio profesional y responsive que comunica mejor la propuesta de MW Trazo y facilita el contacto comercial.",
   },
+  {
+    slug: "bearys",
+    cardImage: "/projects/bearys.webp",
+    image: "/projects/bearys/bearys0.webp",
+    gallery: [
+      "/projects/bearys/bearys1.webp",
+      "/projects/bearys/bearys2.webp",
+      "/projects/bearys/bearys3.webp",
+      "/projects/bearys/bearys4.webp",
+      "/projects/bearys/bearys5.webp",
+    ],
+    title: "Bearys",
+    category: "E-commerce",
+    year: "2026",
+    client: "Bearys",
+    date: "2026",
+    tools: ["React.js", "Tailwind CSS", "Neon Console"],
+    demo: "https://bearys.vercel.app/",
+    services: ["Dirección visual", "Diseño web", "Desarrollo frontend"],
+    introduction:
+      "Un e-commerce básico, sin pasarela de pagos, compras directas por WhatsApp.",
+    overview:
+      "El nuevo e-commerce organiza la información comercial alrededor de las necesidades del visitante. El diseño equilibra personalidad y sobriedad para reforzar la confianza en cada sección.",
+    challenge:
+      "La falta de una plataforma propia que impedia comercializar sus productos a mayor escala, sin pagar comisiones por venta.",
+    solution:
+      "Creamos una estructura visual atractiva, una navegación sencilla y un carrito de compras que genera un resumen del pedido listo para enviar por WhatsApp",
+    result:
+      "Un sitio profesional y responsive que comunica mejor la propuesta de Bearys y facilita el contacto comercial.",
+  },
 ];
 
 export function getProjectBySlug(slug: string) {
