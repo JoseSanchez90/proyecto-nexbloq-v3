@@ -30,7 +30,10 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                 ? "(max-width: 640px) 100vw, 1280px"
                 : "(max-width: 640px) 100vw, 620px"
             }
-            className="object-cover object-top transition-transform duration-700 ease-out"
+            className={cn(
+              "object-cover transition-transform duration-700 ease-out",
+              project.imagePosition === "center" ? "object-center" : "object-top",
+            )}
           />
 
           <div className="absolute right-5 bottom-5 flex items-center gap-2 rounded-full bg-indigo-500 px-2 py-1 text-sm font-semibold uppercase text-white drop-shadow-md">

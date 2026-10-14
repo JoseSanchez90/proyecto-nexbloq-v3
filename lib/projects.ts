@@ -3,6 +3,7 @@ export interface Project {
   cardImage: string;
   image: string;
   gallery: string[];
+  imagePosition?: "center";
   title: string;
   category: string;
   year: string;
@@ -21,45 +22,16 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    slug: "mibuss",
-    cardImage: "/projects/freightflow1.webp",
-    image: "/projects/mibuss/mibuss0.webp",
-    gallery: [
-      "/projects/mibuss/mibuss1.webp",
-      "/projects/mibuss/mibuss2.webp",
-      "/projects/mibuss/mibuss3.webp",
-      "/projects/mibuss/mibuss4.webp",
-      "/projects/mibuss/mibuss5.webp",
-    ],
-    title: "MiBuss CRM",
-    category: "Sistema web",
-    year: "2026",
-    client: "MiBuss",
-    date: "2026",
-    tools: ["Next.js", "TypeScript", "PostgreSQL"],
-    demo: "https://mibuss.vercel.app/login",
-    services: ["Estrategia UX", "Diseño de interfaz", "Desarrollo web"],
-    introduction:
-      "Una plataforma de gestión creada para centralizar la operación comercial y facilitar el seguimiento de cada proceso.",
-    overview:
-      "FreightFlow CRM transforma información dispersa en una experiencia de trabajo clara. El proyecto reúne clientes, oportunidades y tareas dentro de una interfaz consistente, preparada para crecer junto con la operación.",
-    challenge:
-      "Organizar procesos con múltiples estados y responsables sin añadir complejidad al trabajo diario del equipo.",
-    solution:
-      "Diseñamos una arquitectura modular, paneles de lectura rápida y recorridos centrados en las acciones más frecuentes.",
-    result:
-      "Una herramienta más ordenada y escalable, con mejor visibilidad sobre la actividad comercial y sus prioridades.",
-  },
-  {
     slug: "smile-dental",
-    cardImage: "/projects/smiledental.webp",
-    image: "/projects/smile/smile0.webp",
+    cardImage: "/projects/smile/mockup-portada.webp",
+    image: "/projects/smile/mockup-portada.webp",
+    imagePosition: "center",
     gallery: [
-      "/projects/smile/smile1.webp",
-      "/projects/smile/smile2.webp",
-      "/projects/smile/smile5.webp",
-      "/projects/smile/smile4.webp",
-      "/projects/smile/smile3.webp",
+      "/projects/smile/mockup-nosotros.webp",
+      "/projects/smile/mockup-servicios.webp",
+      "/projects/smile/mockup-central.webp",
+      "/projects/smile/mockup-preguntas.webp",
+      "/projects/smile/mockup-contacto.webp",
     ],
     title: "Smile Dental",
     category: "Landing page",
@@ -67,7 +39,7 @@ export const projects: Project[] = [
     client: "Smile Dental",
     date: "2025",
     tools: ["Next.js", "Tailwind CSS", "Figma"],
-    demo: "https://smile-dental-delta.vercel.app/",
+    demo: "https://clinicasmiledental.vercel.app/",
     services: ["Dirección visual", "UX/UI", "Desarrollo responsive"],
     introduction:
       "Una landing page cercana y profesional para presentar servicios odontológicos y convertir visitas en consultas.",
@@ -111,45 +83,16 @@ export const projects: Project[] = [
       "Una herramienta más ordenada y escalable, con mejor visibilidad sobre la actividad hospitalaria y sus prioridades.",
   },
   {
-    slug: "eufrosine",
-    cardImage: "/projects/eufrosine.webp",
-    image: "/projects/eufrosine/eufrosine0.webp",
-    gallery: [
-      "/projects/eufrosine/eufrosine1.webp",
-      "/projects/eufrosine/eufrosine2.webp",
-      "/projects/eufrosine/eufrosine3.webp",
-      "/projects/eufrosine/eufrosine4.webp",
-      "/projects/eufrosine/eufrosine5.webp",
-    ],
-    title: "Eufrosine",
-    category: "Sistema web",
-    year: "2024",
-    client: "Eufrosine",
-    date: "2024",
-    tools: ["React", "TypeScript", "Supabase"],
-    demo: "https://eufrosinepanel.vercel.app/login",
-    services: ["Arquitectura UX", "Sistema de diseño", "Desarrollo web"],
-    introduction:
-      "Un sistema digital diseñado para convertir procesos complejos en una experiencia sencilla, coherente y fácil de administrar.",
-    overview:
-      "Eufrosine parte de una estructura flexible que prioriza la claridad. Cada módulo mantiene patrones visuales consistentes para reducir la curva de aprendizaje y acompañar futuras funcionalidades.",
-    challenge:
-      "Unificar distintas tareas y tipos de información dentro de una experiencia que se sintiera ligera y predecible.",
-    solution:
-      "Definimos componentes reutilizables, jerarquías claras y flujos guiados para las operaciones principales.",
-    result:
-      "Una base digital consistente, preparada para incorporar nuevas herramientas sin perder facilidad de uso.",
-  },
-  {
     slug: "mw-trazo",
-    cardImage: "/projects/mwtrazo.webp",
-    image: "/projects/mwtrazo/mwtrazo0.webp",
+    cardImage: "/projects/mwtrazo/mockup-portada.webp",
+    image: "/projects/mwtrazo/mockup-portada.webp",
+    imagePosition: "center",
     gallery: [
-      "/projects/mwtrazo/mwtrazo1.webp",
-      "/projects/mwtrazo/mwtrazo2.webp",
-      "/projects/mwtrazo/mwtrazo3.webp",
-      "/projects/mwtrazo/mwtrazo4.webp",
-      "/projects/mwtrazo/mwtrazo5.webp",
+      "/projects/mwtrazo/mockup-nosotros.webp",
+      "/projects/mwtrazo/mockup-proyectos.webp",
+      "/projects/mwtrazo/mockup-servicios.webp",
+      "/projects/mwtrazo/mockup-preguntas.webp",
+      "/projects/mwtrazo/mockup-contacto.webp",
     ],
     title: "MW Trazo",
     category: "Sitio corporativo",

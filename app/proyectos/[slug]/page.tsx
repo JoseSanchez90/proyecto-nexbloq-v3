@@ -140,7 +140,10 @@ export default async function ProjectDetailPage({
             fill
             priority
             sizes="(max-width: 1280px) 100vw, 1180px"
-            className="object-cover object-top"
+            className={cn(
+              "object-cover",
+              project.imagePosition === "center" ? "object-center" : "object-top",
+            )}
           />
         </div>
 
@@ -228,7 +231,10 @@ export default async function ProjectDetailPage({
                   alt={project.title + ", detalle " + (index + 1)}
                   fill
                   sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 58vw"
-                  className="object-cover object-top transition-transform duration-700"
+                  className={cn(
+                    "object-cover transition-transform duration-700",
+                    project.imagePosition === "center" ? "object-center" : "object-top",
+                  )}
                 />
               </div>
             ))}
